@@ -23,22 +23,58 @@
         </label>
 
         <label class="block">
-            <input id="isSolid" type="checkbox" class="mr-2" />Твёрдый (isSolid)
+            <input id="isSolid" type="checkbox" class="mr-2" checked/>Твёрдый (isSolid)
         </label>
 
-        <fieldset class="border p-2 rounded">
+        <fieldset class="border p-2 rounded" id="solid-options">
             <legend class="text-sm font-medium">nonSolid</legend>
-            <label class="block">Ширина: <input id="nonSolidWidth" type="number" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
-            <label class="block">Высота: <input id="nonSolidHeight" type="number" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
-            <label class="block">Хитбокс X: <input id="hitboxX" type="number" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
-            <label class="block">Хитбокс Y: <input id="hitboxY" type="number" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
-            <label class="block">Хитбокс Z: <input id="hitboxZ" type="number" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+            <label class="block">Ширина: <input id="nonSolidWidth" type="number" value="1" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+            <label class="block">Высота: <input id="nonSolidHeight" type="number" value="1" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+        <fieldset class="border p-2 rounded">
+            <legend class="text-sm font-medium">offset</legend>
+            <label class="block">x: <input id="hitboxX" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+            <label class="block">y: <input id="hitboxY" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+            <label class="block">z: <input id="hitboxZ" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+        </fieldset>
             <label class="block"><input id="freePlace" type="checkbox" class="mr-2" />free-place</label>
         </fieldset>
 
         <label class="block"><input id="canDestroy" type="checkbox" class="mr-2" />canDestroy</label>
 
-        <fieldset class="border p-2 rounded">
+        <fieldset class="border p-2 rounded" id="destroy-options">
+            <label class="block"><input id="hasDrop" type="checkbox" checked class="mr-2" />hasDrop</label>
+
+            <label class="block">
+                <span class="text-sm font-medium">destroy-time</span>
+                <input id="destroyTime" type="number" value="2" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" />
+            </label>
+
+            <label class="block">
+                <span class="text-sm font-medium">Инструмент</span>
+                <select id="effectiveTool" class="mt-1 w-full rounded border p-2 bg-gray-700 text-white">
+                    <option value="hoe">hoe</option>
+                    <option value="axe">axe</option>
+                    <option value="pickaxe" selected>pickaxe</option>
+                    <option value="sword">sword</option>
+                    <option value="shovel">shovel</option>
+                </select>
+            </label>
+        </fieldset>
+
+        <label class="block"><input id="isSeat" type="checkbox" class="mr-2" />isSeat</label>
+
+
+        <fieldset class="border p-2 rounded" id="seat-options">
+            <legend class="text-sm font-medium">seat.offset</legend>
+            <div  style="display: grid">
+            <label>X: <input id="seatX" type="number" value="0" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
+            <label>Y: <input id="seatY" type="number" value="0.5" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
+            <label>Z: <input id="seatZ" type="number" value="0" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
+            <label><input id="rotateByPassenger" type="checkbox" class="mr-2" />rotate-by-passenger</label>
+            </div>
+        </fieldset>
+
+        <fieldset class="border p-2 rounded" style="display: grid">
             <legend class="text-sm font-medium">canPlace</legend>
             <label><input type="checkbox" id="placeNorth" class="mr-2" />north</label>
             <label><input type="checkbox" id="placeSouth" class="mr-2" />south</label>
@@ -46,39 +82,42 @@
             <label><input type="checkbox" id="placeEast" class="mr-2" />east</label>
             <label><input type="checkbox" id="placeUp" class="mr-2" />up</label>
             <label><input type="checkbox" id="placeDown" class="mr-2" />down</label>
-            <label><input type="checkbox" id="placeInNotSolid" class="mr-2" />in-not-solid</label>
         </fieldset>
 
-        <label class="block">
-            <span class="text-sm font-medium">destroy-time</span>
-            <input id="destroyTime" type="number" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" />
-        </label>
-
-        <label class="block"><input id="isSeat" type="checkbox" class="mr-2" />isSeat</label>
-
-        <fieldset class="border p-2 rounded">
+        <fieldset class="border p-2 rounded"  style="display: grid">
             <legend class="text-sm font-medium">Модель</legend>
-            <label>ID: <input id="modelId" type="text" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
-            <label>CMD: <input id="modelCmd" type="number" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
+            <label>ID: <input id="modelId" type="text" value="feather" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
+            <label>CMD: <input id="modelCmd" type="number" value="0" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
             <label>Цвет: <input id="modelColor" type="color" class="ml-2" /></label>
-            <label>itemId: <input id="itemId" type="text" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
-            <label>itemCmd: <input id="itemCmd" type="number" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
+            <label>itemId: <input id="itemId" type="text" value="feather" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
+            <label>itemCmd: <input id="itemCmd" type="number" value="0" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
             <label>itemColor: <input id="itemColor" type="color" class="ml-2" /></label>
-            <label><input id="isRotates" type="checkbox" class="mr-2" />isRotates</label>
-            <label><input id="rotateByBlockface" type="checkbox" class="mr-2" />rotate-by-blockface</label>
-            <label><input id="rotate45" type="checkbox" class="mr-2" />45-rotating</label>
-            <label><input id="freeRotating" type="checkbox" class="mr-2" />free-rotating</label>
-            <label>blockface-binding: <input id="blockfaceBinding" type="text" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
+
+            <label class="block">
+                <span class="text-sm font-medium">blockface-binding</span>
+                <select id="blockfaceBinding" class="mt-1 w-full rounded border p-2 bg-gray-700 text-white">
+                    <option value="down">down</option>
+                    <option value="up">up</option>
+                    <option value="north" selected>north</option>
+                    <option value="south">south</option>
+                    <option value="west">west</option>
+                    <option value="east">east</option>
+                </select>
+            </label>
+
+
             <label>itemLore (через запятую): <input id="itemLore" type="text" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
             <label><input id="isHat" type="checkbox" class="mr-2" />isHat</label>
         </fieldset>
 
-        <fieldset class="border p-2 rounded">
-            <legend class="text-sm font-medium">seat.offset</legend>
-            <label>X: <input id="seatX" type="number" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
-            <label>Y: <input id="seatY" type="number" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
-            <label>Z: <input id="seatZ" type="number" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
-            <label><input id="rotateByPassenger" type="checkbox" class="mr-2" />rotate-by-passenger</label>
+        <br>
+        <label><input id="isRotates" type="checkbox" class="mr-2" />isRotates</label>
+        <fieldset class="border p-2 rounded" id="rotate-options">
+            <div style="display: grid">
+                <label><input id="rotateByBlockface" type="checkbox" class="mr-2" />rotate-by-blockface</label>
+                <label><input id="rotate45" type="checkbox" class="mr-2" />45-rotating</label>
+                <label><input id="freeRotating" type="checkbox" class="mr-2" />free-rotating</label>
+            </div>
         </fieldset>
 
         <fieldset class="border p-2 rounded">
@@ -88,14 +127,7 @@
             <label>interact: <input id="soundInteract" type="text" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
         </fieldset>
 
-        <label class="block"><input id="hasDrop" type="checkbox" class="mr-2" />hasDrop</label>
 
-        <label class="block">
-            <span class="text-sm font-medium">Инструмент</span>
-            <input id="effectiveTool" type="text" placeholder="pickaxe" class="w-full bg-gray-700 text-white p-2 rounded" />
-        </label>
-
-        <button onclick="generateCode()" class="bg-blue-600 text-white px-4 py-2 rounded mt-4 w-full">Обновить код</button>
     </div>
 
     <!-- Правая панель -->
@@ -115,6 +147,7 @@
         const yaml = `name: '${val('name') || '&fТест'}'
 baseType: ${val('baseType') || 'barrier'}
 isSolid: ${bool('isSolid')}
+${!bool('isSolid') ? `
 nonSolid:
   width: ${num('nonSolidWidth')}
   height: ${num('nonSolidHeight')}
@@ -122,18 +155,32 @@ nonSolid:
     x: ${num('hitboxX')}
     y: ${num('hitboxY')}
     z: ${num('hitboxZ')}
-  free-place: ${bool('freePlace')}
+  free-place: ${bool('freePlace')}` : ''}
 canDestroy: ${bool('canDestroy')}
-canPlace:
-  north: ${bool('placeNorth')}
-  south: ${bool('placeSouth')}
-  west: ${bool('placeWest')}
-  east: ${bool('placeEast')}
-  up: ${bool('placeUp')}
-  down: ${bool('placeDown')}
-  in-not-solid: ${bool('placeInNotSolid')}
+${bool('canDestroy') ? `
 destroy-time: ${num('destroyTime')}
+hasDrop: ${bool('hasDrop')}
+effectiveTool: ${val('effectiveTool') || 'pickaxe'}` : ''}
+
+${bool('placeNorth') || bool('placeSouth') || bool('placeWest') || bool('placeEast') || bool('placeUp') || bool('placeDown') ? `
+canPlace:
+${bool('placeNorth') ? `  north: ${bool('placeNorth')}` : ''}${bool('placeSouth') ? `
+  south: ${bool('placeSouth')}` : ''}${bool('placeWest') ? `
+  west: ${bool('placeWest')}` : ''}${bool('placeEast') ? `
+  east: ${bool('placeEast')}` : ''}${bool('placeUp') ? `
+  up: ${bool('placeUp')}` : ''}${bool('placeDown') ? `
+  down: ${bool('placeDown')}` : ''}` : ''}
+
+
 isSeat: ${bool('isSeat')}
+${bool('isSeat') ? `
+seat:
+  offset:
+    x: ${num('seatX')}
+    y: ${num('seatY')}
+    z: ${num('seatZ')}
+  rotate-by-passenger: ${bool('rotateByPassenger')}
+` : ''}
 model:
   id: ${val('modelId') || 'gold_ingot'}
   cmd: ${num('modelCmd')}
@@ -142,30 +189,84 @@ model:
   itemCmd: ${num('itemCmd')}
   itemColor: '${val('itemColor') || '#FFFFFF'}'
   isRotates: ${bool('isRotates')}
+${bool('isRotates') ? `
   rotate-by-blockface: ${bool('rotateByBlockface')}
   45-rotating: ${bool('rotate45')}
-  free-rotating: ${bool('freeRotating')}
+  free-rotating: ${bool('freeRotating')}` : ''}
+
   blockface-binding: ${val('blockfaceBinding') || 'down'}
   itemLore:
 ${(val('itemLore') || 'Example, Lore').split(',').map(i => `  - ${i.trim()}`).join('\n')}
   isHat: ${bool('isHat')}
-seat:
-  offset:
-    x: ${num('seatX')}
-    y: ${num('seatY')}
-    z: ${num('seatZ')}
-  rotate-by-passenger: ${bool('rotateByPassenger')}
 sounds:
   place: ${val('soundPlace') || 'minecraft:block.stone.place'}
   break: ${val('soundBreak') || 'minecraft:block.stone.break'}
-  interact: ${val('soundInteract') || 'minecraft:block.stone.ui.button.click'}
-hasDrop: ${bool('hasDrop')}
-effectiveTool: ${val('effectiveTool') || 'pickaxe'}`;
+  interact: ${val('soundInteract') || 'minecraft:block.stone.ui.button.click'}`;
 
         get('codeOutput').textContent = yaml;
     }
 
-    window.onload = generateCode;
+    function setupAutoUpdate() {
+        const allInputs = document.querySelectorAll(
+            'input, select, textarea'
+        );
+        allInputs.forEach(el => {
+            const eventType = el.tagName === 'SELECT' ? 'change' : 'input';
+            el.addEventListener(eventType, generateCode);
+        });
+    }
+
+    function toggleOptions(elstr, arr, negative = false) {
+        let enabled = document.getElementById(elstr).checked;
+
+        if (negative) {
+            enabled = !enabled
+        }
+
+        arr.forEach(id => {
+            const el = document.getElementById(id)
+            if (enabled) {
+                el.style.display = "block"
+            } else {
+                el.style.display = "none"
+            }
+        });
+    }
+
+
+    window.onload = () => {
+        generateCode();
+
+        toggleOptions('isRotates', ['rotate-options']);
+        toggleOptions('isSeat', ['seat-options']);
+        toggleOptions('isSolid', ['solid-options'], true);
+        toggleOptions('canDestroy', ["destroy-options"]);
+        setupAutoUpdate()
+
+        document.getElementById('isRotates').addEventListener('change', () => {
+            toggleOptions('isRotates', ['rotate-options']);
+            generateCode();
+        });
+
+        document.getElementById('isSeat').addEventListener('change', () => {
+            toggleOptions('isSeat', ['seat-options']);
+            generateCode();
+        });
+
+        document.getElementById('isSolid').addEventListener('change', () => {
+            toggleOptions('isSolid', ['solid-options'], true);
+            generateCode();
+        });
+
+
+        document.getElementById('canDestroy').addEventListener('change', () => {
+            toggleOptions('canDestroy', ["destroy-options"]);
+            generateCode();
+        });
+
+
+    };
+
 </script>
 </body>
 </html>
