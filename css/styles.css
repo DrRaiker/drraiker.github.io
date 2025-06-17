@@ -1,0 +1,40 @@
+/* Весь скроллбар */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* Ползунок (ручка) */
+::-webkit-scrollbar-thumb {
+    background-color: #4b5563; /* серый */
+    border-radius: 6px;
+}
+
+/* Трек (фон полосы) */
+::-webkit-scrollbar-track {
+    background: #1f2937; /* тёмный фон */
+    border-radius: 6px;
+}
+
+.flex-left {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.flex-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+.flex-space-around {
+    display: flex;
+    justify-content: space-around;
+}
+
+.grid {
+    display: grid;
+}
