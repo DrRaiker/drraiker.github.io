@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Генератор YAML</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-4">
+<div class="grid grid-cols-2 gap-4 h-screen">
+    <!-- Левая панель -->
+    <div class="overflow-y-auto p-4 bg-white rounded shadow space-y-4">
+        <h2 class="text-xl font-bold">Параметры блока</h2>
+
+        <label class="block">
+            <span class="text-sm font-medium">Название</span>
+            <input id="name" type="text" placeholder="&fТест" class="mt-1 w-full rounded border p-2" />
+        </label>
+
+        <label class="block">
+            <span class="text-sm font-medium">Тип блока</span>
+            <select id="baseType" class="mt-1 w-full rounded border p-2">
+                <option value="barrier">barrier</option>
+                <option value="stone">stone</option>
+                <option value="dirt">dirt</option>
+            </select>
+        </label>
+
+        <label class="block">
+            <span class="text-sm font-medium">Можно разрушать</span>
+            <input id="canDestroy" type="checkbox" class="ml-2" checked />
+        </label>
+
+        <label class="block">
+            <span class="text-sm font-medium">Время разрушения</span>
+            <input id="destroyTime" type="range" min="0" max="10" step="1" class="w-full" />
+            <span id="destroyTimeValue" class="text-sm"></span>
+        </label>
+
+        <label class="block">
+            <span class="text-sm font-medium">ID модели</span>
+            <input id="modelId" type="text" placeholder="gold_ingot" class="mt-1 w-full rounded border p-2" />
+        </label>
+
+        <label class="block">
+            <span class="text-sm font-medium">Звук размещения</span>
+            <input id="soundPlace" type="text" placeholder="minecraft:block.stone.place" class="mt-1 w-full rounded border p-2" />
+        </label>
+
+        <button onclick="generateCode()" class="bg-blue-600 text-white px-4 py-2 rounded mt-4">Обновить код</button>
+    </div>
+
+    <!-- Правая панель -->
+    <div class="overflow-y-auto p-4 bg-gray-900 text-white rounded shadow">
+        <h2 class="text-xl font-bold mb-4">Сгенерированный YAML</h2>
+        <pre id="codeOutput" class="whitespace-pre-wrap"></pre>
+    </div>
+</div>
+
+<script>
+    function generateCode() {
+        const name = document.getElementById('name').value || '&fТест';
+        const baseType = document.getElementById('baseType').value;
+        const canDestroy = document.getElementById('canDestroy').checked;
+        const destroyTime = document.getElementById('destroyTime').value;
+        const modelId = document.getElementById('modelId').value || 'gold_ingot';
+        const soundPlace = document.getElementById('soundPlace').value || 'minecraft:block.stone.place';
+
+        const yaml = `name: '${name}'
+baseType: ${baseType}
+canDestroy: ${canDestroy}
+destroy-time: ${destroyTime}
+model:
+  id: ${modelId}
+sounds:
+  place: ${soundPlace}`;
+
+        document.getElementById('codeOutput').textContent = yaml;
+        document.getElementById('destroyTimeValue').textContent = `${destroyTime} сек.`;
+    }
+
+    // Инициализация при загрузке
+    window.onload = generateCode;
+</script>
+</body>
+</html>
