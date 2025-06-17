@@ -1,12 +1,17 @@
 /* Весь скроллбар */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
     height: 10px;
 }
 
 /* Ползунок (ручка) */
 ::-webkit-scrollbar-thumb {
     background-color: #4b5563; /* серый */
+    border-radius: 6px;
+}
+
+.green-scroll::-webkit-scrollbar-thumb {
+    background-color: #64efac; /* серый */
     border-radius: 6px;
 }
 

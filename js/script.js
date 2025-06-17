@@ -5,7 +5,7 @@ function generateCode() {
     const val = id => get(id)?.value;
     const num = id => Number(val(id)) || 0;
 
-    const yaml = `name: '${val('name') || '&fТест'}'
+    let yaml = `name: '${val('name') || '&fТест'}'
 baseType: ${val('baseType') || 'barrier'}
 isSolid: ${bool('isSolid')}
 ${!bool('isSolid') ? `
@@ -87,6 +87,16 @@ sounds:
   break: ${val('soundBreak') || 'minecraft:block.stone.break'}
   interact: ${val('soundInteract') || 'minecraft:block.stone.ui.button.click'}`;
 
+    const additionalBlocks = [...document.querySelectorAll('#additionalBlocks > div')].map((div, i) => {
+        const id = div.querySelector('.id').value || 'none';
+        const x = div.querySelector('.x').value || 0;
+        const y = div.querySelector('.y').value || 0;
+        const z = div.querySelector('.z').value || 0;
+        return `  '${i + 1}':\n    id: ${id}\n    position: ${x} ${y} ${z}`;
+    }).join('\n');
+
+    yaml += `\nadditional-blocks:\n${additionalBlocks || "  '1':\n    id: none\n    position: 0 1 0"}`;
+
     get('codeOutput').textContent = yaml;
 }
 
@@ -115,6 +125,35 @@ function toggleOptions(elstr, arr, negative = false) {
             el.style.display = "none"
         }
     });
+}
+
+let additionalBlockIndex = 1;
+
+function addAdditionalBlock(idValue = '', x = 0, y = 1, z = 0) {
+    const container = document.getElementById("additionalBlocks");
+
+    const blockWrapper = document.createElement("div");
+    blockWrapper.className = "flex flex-wrap items-center gap-2";
+    blockWrapper.dataset.index = additionalBlockIndex;
+
+    blockWrapper.innerHTML = `
+<div class="m-1">
+    <span class="text-sm font-medium">#${additionalBlockIndex}</span>
+    <input type="text" placeholder="id" class="id bg-gray-700 text-white p-1 rounded" value="${idValue}" />
+    <input type="number" class="x w-16 bg-gray-700 text-white p-1 rounded" value="${x}" />
+    <input type="number" class="y w-16 bg-gray-700 text-white p-1 rounded" value="${y}" />
+    <input type="number" class="z w-16 bg-gray-700 text-white p-1 rounded" value="${z}" />
+    <button type="button" class="text-red-400 hover:text-red-600" onclick="this.parentElement.remove(); generateCode()">✖</button>
+    </div>
+  `;
+
+    // Обновлять YAML при изменении любого поля
+    blockWrapper.querySelectorAll("input").forEach(input => {
+        input.addEventListener("input", generateCode);
+    });
+
+    container.appendChild(blockWrapper);
+    additionalBlockIndex++;
 }
 
 
