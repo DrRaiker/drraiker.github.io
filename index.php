@@ -18,16 +18,41 @@
             <input id="name" type="text" placeholder="&fТест" class="mt-1 w-full rounded border p-2 bg-gray-700 text-white" />
         </label>
 
-        <label class="block">
-            <span class="text-sm font-medium">Base Type</span>
-            <input id="baseType" type="text" placeholder="barrier" class="mt-1 w-full rounded border p-2 bg-gray-700 text-white" />
-        </label>
-        <br>
-        <label><input id="isHat" type="checkbox" class="mr-2" />isHat</label>
 
         <label class="block">
-            <input id="isSolid" type="checkbox" class="mr-2" checked/>isSolid
+            <span class="text-sm font-medium">Base Type</span>
+
+            <button type="button" class="relative group">
+                <span class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center">?</span>
+                <span class="absolute border left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity z-10">
+    The type of block that will be used as a hitbox, barrier universal
+  </span>
+            </button>
+
+
+            <input id="baseType" type="text" placeholder="barrier" class="mt-1 w-full rounded border p-2 bg-gray-700 text-white" />
         </label>
+
+
+        <br>
+        <label><input id="isHat" type="checkbox" class="mr-2" />Is Hat</label>
+        <button type="button" class="relative group">
+            <span class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center">?</span>
+            <span class="absolute border left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity z-10">
+    The player can put a block on his head through the inventory.
+  </span>
+        </button>
+
+        <br>
+
+        <label><input id="isSolid" type="checkbox" class="mr-2" checked/>Is Solid</label>
+        <button type="button" class="relative group">
+            <span class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center">?</span>
+            <span class="absolute border left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity z-10">
+    If disabled, the Base Type will not be used. The block will have a hitbox entity.
+  </span>
+        </button>
+
 
 
         <fieldset class="border p-2 rounded" id="solid-options">
@@ -35,23 +60,43 @@
             <label class="block">Width: <input id="nonSolidWidth" type="number" value="1" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
             <label class="block">Height: <input id="nonSolidHeight" type="number" value="1" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
             <fieldset class="border p-2 rounded">
-                <legend class="text-sm font-medium">offset</legend>
+                <legend class="text-sm font-medium">Offset <button type="button" class="relative group">
+                    <span class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center">?</span>
+                    <span class="absolute border left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity z-10">
+                    Offset of hitbox relative to block center
+                    </span>
+                </button></legend>
+
                 <label class="block">x: <input id="hitboxX" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
                 <label class="block">y: <input id="hitboxY" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
                 <label class="block">z: <input id="hitboxZ" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
             </fieldset>
             <br>
-            <label class="block"><input id="freePlace" type="checkbox" class="mr-2" />Free place</label>
+            <label class="block"><input id="freePlace" type="checkbox" class="mr-2" />Free place
+                <button type="button" class="relative group">
+                    <span class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center">?</span>
+                    <span class="absolute border left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity z-10">
+                    If enabled, the block can be placed anywhere, regardless of the block grid
+                    </span>
+                </button>
+            </label>
+
         </fieldset>
 
-        <label class="block"><input id="canDestroy" type="checkbox" checked class="mr-2" />canDestroy</label>
+        <label class="block"><input id="canDestroy" type="checkbox" checked class="mr-2" />Destructible</label>
 
         <fieldset class="border p-2 rounded" id="destroy-options">
-            <label class="block"><input id="hasDrop" type="checkbox" checked class="mr-2" />hasDrop</label>
+            <label class="block"><input id="hasDrop" type="checkbox" checked class="mr-2" />Has Drop</label>
 
             <label class="block">
                 <span class="text-sm font-medium">Destroy time</span>
                 <input id="destroyTime" type="number" value="2" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" />
+                <button type="button" class="relative group">
+                    <span class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center">?</span>
+                    <span class="absolute border left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity z-10">
+                    Block destruction time in seconds
+                    </span>
+                </button>
             </label>
 
             <label class="block">
@@ -66,7 +111,7 @@
             </label>
         </fieldset>
 
-        <label class="block"><input id="isSeat" type="checkbox" class="mr-2" />isSeat</label>
+        <label class="block"><input id="isSeat" type="checkbox" class="mr-2" />Is Seat</label>
 
 
         <fieldset class="border p-2 rounded" id="seat-options">

@@ -128,7 +128,16 @@ function toggleOptions(elstr, arr, negative = false) {
 }
 
 let additionalBlockIndex = 1;
-
+function tip(text) {
+    return `
+      <button type="button" class="relative group" tabindex="0">
+        <span class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center">?</span>
+        <span class="absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity z-10">
+          ${text}
+        </span>
+      </button>
+    `;
+}
 function addAdditionalBlock(idValue = '', x = 0, y = 1, z = 0) {
     const container = document.getElementById("additionalBlocks");
 
