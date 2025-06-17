@@ -76,12 +76,12 @@
 
         <fieldset class="border p-2 rounded" style="display: grid">
             <legend class="text-sm font-medium">canPlace</legend>
-            <label><input type="checkbox" id="placeNorth" class="mr-2" />north</label>
-            <label><input type="checkbox" id="placeSouth" class="mr-2" />south</label>
-            <label><input type="checkbox" id="placeWest" class="mr-2" />west</label>
-            <label><input type="checkbox" id="placeEast" class="mr-2" />east</label>
-            <label><input type="checkbox" id="placeUp" class="mr-2" />up</label>
-            <label><input type="checkbox" id="placeDown" class="mr-2" />down</label>
+            <label><input type="checkbox" id="placeNorth" class="mr-2" checked />north</label>
+            <label><input type="checkbox" id="placeSouth" class="mr-2" checked />south</label>
+            <label><input type="checkbox" id="placeWest" class="mr-2" checked />west</label>
+            <label><input type="checkbox" id="placeEast" class="mr-2" checked />east</label>
+            <label><input type="checkbox" id="placeUp" class="mr-2" checked />up</label>
+            <label><input type="checkbox" id="placeDown" class="mr-2" checked />down</label>
         </fieldset>
 
         <fieldset class="border p-2 rounded"  style="display: grid">
@@ -93,18 +93,6 @@
             <label>itemCmd: <input id="itemCmd" type="number" value="0" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
             <label>itemColor: <input id="itemColor" type="color" value="#FFFFFF" class="ml-2" /></label>
 
-            <label class="block">
-                <span class="text-sm font-medium">blockface-binding</span>
-                <select id="blockfaceBinding" class="mt-1 w-full rounded border p-2 bg-gray-700 text-white">
-                    <option value="down">down</option>
-                    <option value="up">up</option>
-                    <option value="north" selected>north</option>
-                    <option value="south">south</option>
-                    <option value="west">west</option>
-                    <option value="east">east</option>
-                </select>
-            </label>
-
 
             <label>itemLore (через запятую): <input id="itemLore" type="text" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
             <label><input id="isHat" type="checkbox" class="mr-2" />isHat</label>
@@ -114,17 +102,29 @@
         <label><input id="isRotates" type="checkbox" class="mr-2" />isRotates</label>
         <fieldset class="border p-2 rounded" id="rotate-options">
             <div style="display: grid">
-                <label><input id="rotateByBlockface" type="checkbox" class="mr-2" />rotate-by-blockface</label>
                 <label><input id="rotate45" type="checkbox" class="mr-2" />45-rotating</label>
                 <label><input id="freeRotating" type="checkbox" class="mr-2" />free-rotating</label>
+                <label><input id="rotateByBlockface" type="checkbox" class="mr-2" />rotate-by-blockface</label>
+                <label class="block" id="binding">
+                    <span class="text-sm font-medium">blockface-binding</span>
+                    <select id="blockfaceBinding" class="mt-1 w-full rounded border p-2 bg-gray-700 text-white">
+                        <option value="down">down</option>
+                        <option value="up">up</option>
+                        <option value="north" selected>north</option>
+                        <option value="south">south</option>
+                        <option value="west">west</option>
+                        <option value="east">east</option>
+                    </select>
+                </label>
+
             </div>
         </fieldset>
 
         <fieldset class="border p-2 rounded">
             <legend class="text-sm font-medium">Звуки</legend>
-            <label>place: <input id="soundPlace" type="text" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
-            <label>break: <input id="soundBreak" type="text" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
-            <label>interact: <input id="soundInteract" type="text" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
+            <label>place: <input id="soundPlace" type="text" value="minecraft:block.stone.place" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
+            <label>break: <input id="soundBreak" type="text" value="minecraft:block.stone.break" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
+            <label>interact: <input id="soundInteract" type="text" value="minecraft:block.stone.ui.button.click" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
         </fieldset>
 
 
@@ -132,7 +132,7 @@
 
     <!-- Правая панель -->
     <div class="overflow-y-auto p-4 bg-gray-950 text-green-300 rounded shadow">
-        <h2 class="text-xl font-bold mb-4">Сгенерированный YAML</h2>
+<!--        <h2 class="text-xl font-bold mb-4">Сгенерированный YAML</h2>-->
         <pre id="codeOutput" class="whitespace-pre-wrap"></pre>
     </div>
 </div>
@@ -189,12 +189,14 @@ model:
   itemCmd: ${num('itemCmd')}
   itemColor: '${val('itemColor') || '#FFFFFF'}'
   isRotates: ${bool('isRotates')}
-${bool('isRotates') ? `
-  rotate-by-blockface: ${bool('rotateByBlockface')}
-  45-rotating: ${bool('rotate45')}
+${bool('rotateByBlockface') ? `
+  rotate-by-blockface: ${bool('rotateByBlockface')}` : ''}
+${bool('rotate45') ? `
+  45-rotating: ${bool('rotate45')}` : ''}
+${bool('freeRotating') ? `
   free-rotating: ${bool('freeRotating')}` : ''}
-
-  blockface-binding: ${val('blockfaceBinding') || 'down'}
+${bool('rotateByBlockface') ? `
+  blockface-binding: ${val('blockfaceBinding') || 'down'}` : ''}
   itemLore:
 ${(val('itemLore') || 'Example, Lore').split(',').map(i => `  - ${i.trim()}`).join('\n')}
   isHat: ${bool('isHat')}
@@ -241,6 +243,7 @@ sounds:
         toggleOptions('isSeat', ['seat-options']);
         toggleOptions('isSolid', ['solid-options'], true);
         toggleOptions('canDestroy', ["destroy-options"]);
+        toggleOptions('rotateByBlockface', ["binding"]);
         setupAutoUpdate()
 
         document.getElementById('isRotates').addEventListener('change', () => {
@@ -261,6 +264,11 @@ sounds:
 
         document.getElementById('canDestroy').addEventListener('change', () => {
             toggleOptions('canDestroy', ["destroy-options"]);
+            generateCode();
+        });
+
+        document.getElementById('rotateByBlockface').addEventListener('change', () => {
+            toggleOptions('rotateByBlockface', ["binding"]);
             generateCode();
         });
 
