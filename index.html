@@ -9,7 +9,10 @@
     <script src="js/lang.js"></script>
     <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body class="bg-gray-900 text-white p-4">
+<body class="bg-gray-900 text-white">
+<header>
+<h1 class="text-xl font-bold mb-2">MeowFurniture Generator</h1>
+</header>
 <div class="grid grid-cols-2 gap-4 h-screen">
     <div class="overflow-y-auto p-4 bg-gray-800 rounded shadow space-y-4">
 
@@ -491,22 +494,26 @@ Or you can use minecraft tags, such as #minecraft:planks, #minecraft:logs, #mine
             </span>
                 <input id="soundInteract" type="text" value="minecraft:block.stone.ui.button.click" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
         </fieldset>
-
+<br>
+<br>
     </div>
 
 
     <div class="overflow-y-auto p-4 bg-gray-950 text-green-300 rounded shadow green-scroll">
-        <button onclick="copyToClipboard()" class="absolute top-5 right-5 mt-2 mr-2 bg-black text-green-400 border px-3 py-1 rounded">Copy YAML</button>
+        <button onclick="copyToClipboard()" class="absolute top-15 right-5 mt-2 mr-2 bg-black text-green-400 border px-3 py-1 rounded">Copy YAML</button>
         <button onclick="toggleYamlImport()" class="import-button mt-2 mr-2 bg-black text-blue-400 border px-3 py-1 rounded">Import YAML</button>
         <pre id="codeOutput" class="whitespace-pre-wrap"></pre>
     </div>
+    <br>
+    <br>
 </div>
 
-<div id="yamlImportBox" class="hidden bg-gray-900 fixed top-16 right-40 p-4 rounded border shadow w-96 z-50">
+<div id="yamlImportBox" class="hidden bg-gray-900 fixed top-40 right-40 p-4 rounded border shadow w-96 z-50">
     <p class="text-lg mb-2">Paste YAML:</p>
     <textarea id="yamlInput" rows="25" class="w-full bg-black text-green-300 p-2 rounded mb-2"></textarea>
     <button onclick="applyYaml()" class="bg-black text-blue-400 border px-4 py-2 rounded">Apply</button>
     <button onclick="document.getElementById('yamlImportBox').classList.add('hidden');" class="bg-black text-blue-400 border px-4 py-2 rounded">Close</button>
+
 </div>
 
 <script src="js/script.js"></script>

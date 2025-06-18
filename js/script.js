@@ -588,4 +588,6 @@ window.onload = () => {
         applyTranslations(selectedLang);
     });
 
+    document.body.classList.add('overflow-hidden'); // заблокировать
+
 };

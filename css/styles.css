@@ -4,6 +4,7 @@
     height: 10px;
 }
 
+
 /* Ползунок (ручка) */
 ::-webkit-scrollbar-thumb {
     background-color: #4b5563; /* серый */
@@ -27,8 +28,15 @@
 
 .import-button {
     position: absolute;
-    top: 20px;
+    top: 76px;
     right: 132px;
+}
+
+header {
+    background: #111827;
+    height: 60px;
+    width: 100%;
+    padding: 15px;
 }
 
 .flex-left {
