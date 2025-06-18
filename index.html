@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Генератор YAML</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-gray-900 text-white p-4">
+<div class="grid grid-cols-2 gap-4 h-screen">
+
+    <div class="overflow-y-auto p-4 bg-gray-800 rounded shadow space-y-4">
+        <h2 class="text-xl font-bold">Block properties</h2>
+
+        <label class="block">
+            <span class="text-sm font-medium">Name</span>
+            <input id="name" type="text" placeholder="&fТест" class="mt-1 w-full rounded border p-2 bg-gray-700 text-white" />
+        </label>
+
+
+        <label class="block">
+            <span class="text-sm font-medium">Base Type</span>
+
+            <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  The type of block that will be used as a hitbox, barrier universal
+  </span>
+            </span>
+
+
+            <input id="baseType" type="text" placeholder="barrier" class="mt-1 w-full rounded border p-2 bg-gray-700 text-white" />
+        </label>
+
+
+        <br>
+        <label><input id="isHat" type="checkbox" class="mr-2" />Is Hat</label>
+        <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  The player can put a block on his head through the inventory.
+  </span>
+        </span>
+
+        <br>
+
+        <label><input id="isSolid" type="checkbox" class="mr-2" checked/>Is Solid</label>
+        <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  If disabled, the Base Type will not be used. The block will have a hitbox entity.
+  </span>
+        </span>
+
+
+
+        <fieldset class="border p-2 rounded" id="solid-options">
+            <legend class="text-sm font-medium">Non solid Hitbox</legend>
+            <label class="block">Width: <input id="nonSolidWidth" type="number" value="1" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+            <label class="block">Height: <input id="nonSolidHeight" type="number" value="1" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+            <fieldset class="border p-2 rounded">
+                <legend class="text-sm font-medium">Offset <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  Offset of hitbox relative to block center
+                    </span>
+                </span></legend>
+
+                <label class="block">x: <input id="hitboxX" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+                <label class="block">y: <input id="hitboxY" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+                <label class="block">z: <input id="hitboxZ" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+            </fieldset>
+            <br>
+            <label class="block"><input id="freePlace" type="checkbox" class="mr-2" />Free place
+                <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  If enabled, the block can be placed anywhere, regardless of the block grid
+                    </span>
+                </span>
+            </label>
+
+        </fieldset>
+
+        <label class="block"><input id="canDestroy" type="checkbox" checked class="mr-2" />Destructible</label>
+
+        <fieldset class="border p-2 rounded" id="destroy-options">
+            <label class="block"><input id="hasDrop" type="checkbox" checked class="mr-2" />Has Drop</label>
+
+            <label class="block">
+                <span class="text-sm font-medium">Destroy time</span>
+                <input id="destroyTime" type="number" value="2" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" />
+                <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  Block destruction time in seconds
+                    </span>
+                </span>
+            </label>
+
+            <label class="block">
+                <span class="text-sm font-medium">Effective instrument</span>
+                <select id="effectiveTool" class="mt-1 w-full rounded border p-2 bg-gray-700 text-white">
+                    <option value="hoe">hoe</option>
+                    <option value="axe">axe</option>
+                    <option value="pickaxe" selected>pickaxe</option>
+                    <option value="sword">sword</option>
+                    <option value="shovel">shovel</option>
+                </select>
+            </label>
+        </fieldset>
+        <br>
+        <label><input id="isSeat" type="checkbox" class="mr-2" />Is Seat</label>
+        <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  Will the player be able to sit on this block by pressing RMB
+                    </span>
+        </span>
+
+        <fieldset class="border p-2 rounded" id="seat-options">
+            <legend class="text-sm font-medium">Seat Position
+                <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  The position where the player will sit. 0 0 0 - center of the block
+                    </span>
+                </span>
+            </legend>
+            <div  style="display: grid">
+            <label>X: <input id="seatX" type="number" value="0" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
+            <label>Y: <input id="seatY" type="number" value="0" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
+            <label>Z: <input id="seatZ" type="number" value="0" class="bg-gray-700 text-white p-1 rounded ml-2" /></label>
+            <label><input id="rotateByPassenger" type="checkbox" class="mr-2" />Rotates after the player
+
+                <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  Will the model rotate to follow the body of a seated player?
+                    </span>
+                </span>
+
+            </label>
+            </div>
+        </fieldset>
+
+        <fieldset class="border p-2 rounded" style="display: grid">
+            <legend class="text-sm font-medium">Сan place on
+
+                <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  On which sides of the block can this block be placed?
+                    </span>
+                </span>
+
+            </legend>
+            <label><input type="checkbox" id="placeNorth" class="mr-2" checked />north</label>
+            <label><input type="checkbox" id="placeSouth" class="mr-2" checked />south</label>
+            <label><input type="checkbox" id="placeWest" class="mr-2" checked />west</label>
+            <label><input type="checkbox" id="placeEast" class="mr-2" checked />east</label>
+            <label><input type="checkbox" id="placeUp" class="mr-2" checked />up</label>
+            <label><input type="checkbox" id="placeDown" class="mr-2" checked />down</label>
+        </fieldset>
+
+        <fieldset class="border p-2 rounded"  style="display: grid">
+            <legend class="text-sm font-medium">Model</legend>
+            <div class=" flex-space-around">
+                <div class="grid m-5">
+                    <p class="text-sm font-medium">Block
+
+                        <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  What item will be displayed when the block is placed
+                    </span>
+                        </span>
+                    </p>
+
+                    <label>id: <input id="modelId" type="text" value="feather" class="bg-gray-700 text-white p-1 rounded ml-2 flex-right" /></label>
+                    <label>cmd: <input id="modelCmd" type="number" value="0" class="bg-gray-700 text-white p-1 rounded ml-2 flex-right" /></label>
+                    <label>color: <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  Only <b>leather_armor</b> and <b>leather_horse_armor</b> are supported
+                    </span>
+                    </span><input id="modelColor" type="color" value="#FFFFFF" class="ml-2 flex-right" /></label>
+
+                </div>
+
+                <div class="grid m-5">
+                    <p class="text-sm font-medium">Inventory
+
+                        <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  What item will be displayed when the block is in inventory
+                    </span>
+                        </span></p>
+                    <label>id: <input id="itemId" type="text" value="feather" class="bg-gray-700 text-white p-1 rounded ml-2 flex-right" /></label>
+                    <label>cmd: <input id="itemCmd" type="number" value="0" class="bg-gray-700 text-white p-1 rounded ml-2 flex-right" /></label>
+                    <label>color:  <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  Only <b>leather_armor</b> and <b>leather_horse_armor</b> are supported
+                    </span>
+                    </span><input id="itemColor" type="color" value="#FFFFFF" class="ml-2 flex-right" /></label>
+                </div>
+            </div>
+
+            <label>Lore:
+                <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  Can be separated with \n for new lines. Leave blank for no lore.
+                    </span>
+                </span>
+                <input id="itemLore" type="text" value="Example\n Lore" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
+            <br>
+
+            <p class="text-sm font-medium">Properties of the placed block model</p>
+            <div class=" flex-space-around">
+                <fieldset class="border p-2 m-2 rounded grid">
+                    <legend class="text-sm font-medium">Scale</legend>
+                    <label class="block">x: <input id="scaleX" type="number" value="1" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+                    <label class="block">y: <input id="scaleY" type="number" value="1" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+                    <label class="block">z: <input id="scaleZ" type="number" value="1" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+                </fieldset>
+
+                <fieldset class="border p-2 m-2 rounded grid">
+                    <legend class="text-sm font-medium">Rotation</legend>
+                    <label class="block">yaw: <input id="yaw" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+                    <label class="block">pitch: <input id="pitch" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+                </fieldset>
+
+                <fieldset class="border p-2 m-2 rounded grid" id="offset">
+                    <legend class="text-sm font-medium">Offset</legend>
+                    <label class="block">x: <input id="offsetX" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+                    <label class="block">y: <input id="offsetY" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+                    <label class="block">z: <input id="offsetZ" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+                </fieldset>
+            </div>
+        </fieldset>
+
+        <br>
+        <label><input id="isRotates" type="checkbox" class="mr-2" />Is Rotates</label>
+        <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  If enabled, the block will turn towards the player when placed, like a chest for example.
+                    </span>
+        </span>
+        <fieldset class="border p-2 rounded" id="rotate-options">
+            <div style="display: grid">
+                <label><input id="rotate45" type="checkbox" class="mr-2" />Rotate by 45°
+                    <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  Rotation similar to heads.
+                    </span>
+                    </span>
+                </label>
+
+
+                <label><input id="freeRotating" type="checkbox" class="mr-2" />Free rotation
+                    <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  The model will turn exactly towards the player.
+                    </span>
+                    </span>
+                </label>
+                <label><input id="rotateByBlockface" type="checkbox" class="mr-2" />Rotate relative to blockface
+                    <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  The rotation depends on the side of the block on which this block is placed. Similar to the rotation of the frame or painting
+                    </span>
+                    </span>
+                </label>
+                <div id="binding">
+                <br>
+                <label class="block">
+                    <span class="text-sm font-medium">blockface-binding</span>
+                    <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  The side of the model that it should be attached to the block. Blockface is specified according to BlockBench
+                    </span>
+                    </span>
+                    <select id="blockfaceBinding" class="mt-1 w-full rounded border p-2 bg-gray-700 text-white">
+                        <option value="down">down</option>
+                        <option value="up">up</option>
+                        <option value="north" selected>north</option>
+                        <option value="south">south</option>
+                        <option value="west">west</option>
+                        <option value="east">east</option>
+                    </select>
+                </label>
+                <br>
+
+                <fieldset class="border p-2 m-2 rounded grid" id="blockface-offset">
+                    <legend class="text-sm font-medium">Blockface Offset
+                        <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  Replaces the offset from the Model section. Offsets relative to the side of the block on which this block is placed
+                    </span>
+                        </span>
+                    </legend>
+                    <div class="flex-left">
+                        <label class="block m-1">x: <input id="blockface-offsetX" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+                        <label class="block m-1">y: <input id="blockface-offsetY" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+                        <label class="block m-1">z: <input id="blockface-offsetZ" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
+                    </div>
+                </fieldset>
+                </div>
+            </div>
+        </fieldset>
+
+        <br>
+        <label><input id="hasInventory" type="checkbox" class="mr-2" />Has Inventory</label>
+        <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  Opens inventory on RMB
+                    </span>
+        </span>
+        <fieldset class="border p-2 rounded" id="inv-options">
+
+            <legend class="text-sm font-medium">Inventory</legend>
+            <div style="display: grid">
+
+                <label class="block">
+                    <span class="text-sm font-medium">Number of lines:</span>
+                    <input
+                            id="lines"
+                            type="range"
+                            min="1"
+                            max="6"
+                            value="1"
+                            class="w-full mt-1"
+                            oninput="this.nextElementSibling.textContent = this.value"
+                    />
+                    <span class="ml-2">1</span>
+                </label>
+
+                <label>Inventory name: <input id="invName" type="text" value="&0Inventory Name" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
+            </div>
+        </fieldset>
+
+        <fieldset class="border p-2 rounded">
+
+            <legend class="text-sm font-medium">Components</legend>
+            <div style="display: grid">
+
+                <label class="block">
+                    <span class="text-sm font-medium">Max Stack:</span>
+                    <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  The maximum stack size of this block. If an item with a maximum stack less than the specified one is used, it will cause an error
+                    </span>
+                    </span>
+                    <input
+                            id="maxStack"
+                            type="range"
+                            min="1"
+                            max="64"
+                            value="64"
+                            class="w-full mt-1"
+                            oninput="this.nextElementSibling.textContent = this.value"
+                    />
+                    <span class="ml-2">64</span>
+                </label>
+            </div>
+        </fieldset>
+
+        <fieldset class="border p-2 rounded space-y-2">
+            <legend class="text-sm font-medium">Additional Blocks
+                <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  Useful if you want to make a block consisting of several blocks. For example, a sofa three blocks long.<br><br>
+                  id - Custom block file name<br>
+                  if a block by id is not found, it is skipped<br>
+                  x y z - offset in blocks, relative to the main block. 0 0 0 - will do nothing
+                    </span>
+                </span>
+            </legend>
+            <div id="additionalBlocks">
+
+            </div>
+
+            <button
+                    type="button"
+                    class="bg-green-300 text-white px-2 py-1 rounded mt-2"
+                    onclick="addAdditionalBlock()"
+            >
+                ➕
+            </button>
+        </fieldset>
+
+
+        <br>
+        <label><input id="hasClickCommands" type="checkbox" class="mr-2" />Has Click Commands</label>
+        <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  Commands that the console will execute when the player clicks on the block. Placeholders will be executed on behalf of the player who clicked.
+              </span>
+            </span>
+        <fieldset class="border p-2 rounded space-y-2" id="clickCommands">
+            <legend class="text-sm font-medium">Commands on click on block</legend>
+            <div id="clickCommandsContainer"></div>
+            <button
+                    type="button"
+                    class="bg-green-300 text-white px-2 py-1 rounded mt-2"
+                    onclick="addClickCommand()"
+            >
+                ➕
+            </button>
+        </fieldset>
+        <br>
+        <br>
+        <label><input id="hasRecipe" type="checkbox" class="mr-2" />Has Recipe</label>
+        <fieldset class="border p-2 rounded space-y-2" id="recipe-options">
+            <legend class="text-sm font-medium">Recipe
+                <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  Place the symbols in the cells as the items should be placed in the crafting table. Do not fill empty slots.
+              </span>
+            </span>
+            </legend>
+        <div class="p-4 bg-gray-800 rounded text-white max-w-md">
+            <div id="shapeGrid" class="grid grid-cols-3 gap-2 mb-4">
+
+                <template id="symbol-template">
+                    <input type="text" maxlength="1" class="bg-gray-700 text-white p-2 text-center rounded w-12 h-12 symbol-input" />
+                </template>
+            </div>
+
+            <div id="ingredientsFields">
+                <p class="text-md mt-4 mb-2 font-semibold">Ingredients
+                    <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  assign each symbol a spigot material, such as stone, diamond, stick.
+Or you can use minecraft tags, such as #minecraft:planks, #minecraft:logs, #minecraft:wooden_slabs
+              </span>
+            </span>
+                </p>
+
+            </div>
+        </div>
+        </fieldset>
+
+
+
+        <fieldset class="border p-2 rounded">
+            <legend class="text-sm font-medium">Sounds</legend>
+            <label>On Place: <input id="soundPlace" type="text" value="minecraft:block.stone.place" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
+            <label>On Break: <input id="soundBreak" type="text" value="minecraft:block.stone.break" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
+            <label>On Interact:
+                <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  Plays when the player sits on a block or opens the block's inventory.
+              </span>
+            </span>
+                <input id="soundInteract" type="text" value="minecraft:block.stone.ui.button.click" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
+        </fieldset>
+
+    </div>
+
+
+    <div class="overflow-y-auto p-4 bg-gray-950 text-green-300 rounded shadow green-scroll">
+        <button onclick="copyToClipboard()" class="absolute top-5 right-5 mt-2 mr-2 bg-black text-green-400 border px-3 py-1 rounded">Скопировать YAML</button>
+
+        <pre id="codeOutput" class="whitespace-pre-wrap"></pre>
+    </div>
+</div>
+<script src="js/script.js"></script>
+
+</body>
+</html>

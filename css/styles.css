@@ -21,6 +21,10 @@
     border-radius: 6px;
 }
 
+#shapeGrid {
+    width: 160px;
+}
+
 .flex-left {
     display: flex;
     justify-content: flex-start;

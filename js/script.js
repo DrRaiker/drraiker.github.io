@@ -82,6 +82,8 @@ inventory:
   name: '${val('invName')}'` : ''}
 components:
   max_stack_size: ${num('maxStack')}
+${bool('hasClickCommands') ? `hasClickCommands: true` : ''}
+${bool('hasRecipe') ? `hasRecipe: true` : ''}
 sounds:
   place: ${val('soundPlace') || 'minecraft:block.stone.place'}
   break: ${val('soundBreak') || 'minecraft:block.stone.break'}
@@ -97,6 +99,87 @@ sounds:
 
     yaml += `\nadditional-blocks:\n${additionalBlocks || "  '1':\n    id: none\n    position: 0 1 0"}`;
 
+    if (bool('hasClickCommands')) {
+        const commandInputs = [...document.querySelectorAll('.commandInput')]
+            .map(input => input.value.trim())
+            .filter(cmd => cmd !== '');
+
+        if (commandInputs.length > 0) {
+            yaml += `\nclickCommands:\n${commandInputs.map(cmd => `- ${cmd}`).join('\n')}`;
+        }
+    }
+
+    if (bool('hasRecipe')) {
+        let shape = [];
+        for (let i = 0; i < 3; i++) {
+            const row = symbolInputs.slice(i * 3, i * 3 + 3).map(input => input.value || ' ').join('');
+            shape.push(`${row}`);
+        }
+
+        const ingredientsYAML = [];
+        ingredientFields.forEach((wrapper, symbol) => {
+            const value = wrapper.querySelector("input").value || "air";
+            ingredientsYAML.push(`    ${symbol}: ${value}`);
+        });
+
+        let startIndex = 5
+        let endIndex = 0
+
+        for (let j = 0; j < shape.length; j++) {
+            const str = shape[j]
+
+            for (let i = 0; i < str.length; i++) {
+                if (str[i] !== " ") {
+                    startIndex = Math.min(startIndex, i)
+                }
+            }
+        }
+
+        for (let j = 0; j < shape.length; j++) {
+            const str = shape[j]
+
+            for (let i = 2; i > 0; i--) {
+                if (str[i] !== " ") {
+                    endIndex = Math.max(endIndex, i)
+                }
+            }
+        }
+
+        if (shape[0] === "   ") {
+            shape.shift()
+        }
+        if (shape[0] === "   " && shape.length === 2) {
+            shape.shift()
+        }
+
+
+        if (shape[2] === "   ") {
+            shape.pop()
+        }
+        if (shape[1] === "   " && shape.length === 2) {
+            shape.pop()
+        }
+
+        for (let j = 0; j < shape.length; j++) {
+
+            shape[j] = `  - '${shape[j].slice(startIndex, endIndex + 1)}'`
+
+        }
+
+
+        yaml += `
+recipe:
+  shape:
+${shape.join('\n')}
+  ingredients:
+${ingredientsYAML.join('\n')}
+`
+    }
+
+    yaml = yaml.split('\n')
+        .filter(line => line.trim() !== '')
+        .join('\n');
+
     get('codeOutput').textContent = yaml;
 }
 
@@ -109,6 +192,73 @@ function setupAutoUpdate() {
         el.addEventListener(eventType, generateCode);
     });
 }
+
+const grid = document.getElementById("shapeGrid");
+const ingredientsContainer = document.getElementById("ingredientsFields");
+const symbolInputs = [];
+const ingredientFields = new Map(); // symbol -> DOM element
+
+// Создаём 9 input-полей
+for (let i = 0; i < 9; i++) {
+    const input = document.createElement("input");
+    input.type = "text";
+    input.maxLength = 1;
+    input.className = "bg-gray-700 text-white p-2 text-center rounded w-12 h-12 symbol-input";
+    symbolInputs.push(input);
+
+    input.addEventListener("input", () => {
+        updateIngredientFields();
+    });
+
+    grid.appendChild(input);
+}
+
+function updateIngredientFields() {
+    const symbols = symbolInputs
+        .map(i => i.value.trim())
+        .filter(s => s !== '');
+
+    const uniqueSymbols = new Set(symbols);
+
+    uniqueSymbols.forEach(symbol => {
+        if (!ingredientFields.has(symbol)) {
+            addIngredientField(symbol);
+        }
+    });
+
+    [...ingredientFields.keys()].forEach(symbol => {
+        if (!uniqueSymbols.has(symbol)) {
+            const el = ingredientFields.get(symbol);
+            el.remove();
+            ingredientFields.delete(symbol);
+        }
+    });
+}
+
+function addIngredientField(symbol) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "flex items-center mb-2";
+    wrapper.dataset.symbol = symbol;
+
+    const label = document.createElement("span");
+    label.textContent = `${symbol} :`;
+    label.className = "w-6";
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.placeholder = "Spigot material or minecraft tag";
+    input.className = "bg-gray-700 text-white p-1 rounded ml-2 w-full";
+
+    // ВАЖНО: обновляем YAML при вводе
+    input.addEventListener("input", generateCode);
+
+    wrapper.appendChild(label);
+    wrapper.appendChild(input);
+    ingredientsContainer.appendChild(wrapper);
+
+    ingredientFields.set(symbol, wrapper);
+}
+
 
 function toggleOptions(elstr, arr, negative = false) {
     let enabled = document.getElementById(elstr).checked;
@@ -127,17 +277,23 @@ function toggleOptions(elstr, arr, negative = false) {
     });
 }
 
-let additionalBlockIndex = 1;
-function tip(text) {
-    return `
-      <button type="button" class="relative group" tabindex="0">
-        <span class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center">?</span>
-        <span class="absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity z-10">
-          ${text}
-        </span>
-      </button>
-    `;
+function addClickCommand(value = '') {
+    const container = document.getElementById("clickCommandsContainer");
+
+    const div = document.createElement("div");
+    div.className = "flex gap-2 items-center";
+
+    div.innerHTML = `
+    <input type="text" class="commandInput bg-gray-700 text-white p-1 m-1 rounded w-full" value="${value}" />
+    <button type="button" class="text-red-400 hover:text-red-600" onclick="this.parentElement.remove(); generateCode()">✖</button>
+  `;
+
+    div.querySelector("input").addEventListener("input", generateCode);
+    container.appendChild(div);
 }
+
+
+let additionalBlockIndex = 1;
 function addAdditionalBlock(idValue = '', x = 0, y = 1, z = 0) {
     const container = document.getElementById("additionalBlocks");
 
@@ -147,7 +303,6 @@ function addAdditionalBlock(idValue = '', x = 0, y = 1, z = 0) {
 
     blockWrapper.innerHTML = `
 <div class="m-1">
-    <span class="text-sm font-medium">#${additionalBlockIndex}</span>
     <input type="text" placeholder="id" class="id bg-gray-700 text-white p-1 rounded" value="${idValue}" />
     <input type="number" class="x w-16 bg-gray-700 text-white p-1 rounded" value="${x}" />
     <input type="number" class="y w-16 bg-gray-700 text-white p-1 rounded" value="${y}" />
@@ -165,8 +320,19 @@ function addAdditionalBlock(idValue = '', x = 0, y = 1, z = 0) {
     additionalBlockIndex++;
 }
 
+function copyToClipboard() {
+    const text = document.getElementById("codeOutput").textContent;
+
+    navigator.clipboard.writeText(text).then(() => {
+        alert("Скопировано в буфер обмена!");
+    }).catch(err => {
+        alert("Ошибка копирования: " + err);
+    });
+}
+
 
 window.onload = () => {
+    addClickCommand('say %player_name% clicked on the block'); // Значение по умолчанию
     generateCode();
 
     toggleOptions('isRotates', ['rotate-options']);
@@ -175,6 +341,8 @@ window.onload = () => {
     toggleOptions('canDestroy', ["destroy-options"]);
     toggleOptions('rotateByBlockface', ["binding"]);
     toggleOptions('hasInventory', ["inv-options"]);
+    toggleOptions('hasClickCommands', ["clickCommands"]);
+    toggleOptions('hasRecipe', ["recipe-options"]);
     setupAutoUpdate()
 
     document.getElementById('isRotates').addEventListener('change', () => {
@@ -205,6 +373,14 @@ window.onload = () => {
     });
     document.getElementById('hasInventory').addEventListener('change', () => {
         toggleOptions('hasInventory', ["inv-options"]);
+        generateCode();
+    });
+    document.getElementById('hasClickCommands').addEventListener('change', () => {
+        toggleOptions('hasClickCommands', ["clickCommands"]);
+        generateCode();
+    });
+    document.getElementById('hasRecipe').addEventListener('change', () => {
+        toggleOptions('hasRecipe', ["recipe-options"]);
         generateCode();
     });
 
