@@ -22,6 +22,12 @@
     border-radius: 6px;
 }
 
+#yamlImportBox {
+    position: fixed;
+    top: 20px;
+    right: 270px;
+}
+
 #shapeGrid {
     width: 160px;
 }
