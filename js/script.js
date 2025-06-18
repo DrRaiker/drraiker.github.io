@@ -324,7 +324,7 @@ function copyToClipboard() {
     const text = document.getElementById("codeOutput").textContent;
 
     navigator.clipboard.writeText(text).then(() => {
-        alert("Скопировано в буфер обмена!");
+        alert("Скопировано в буфер обмена!\nВставьте этот текст в MeowFurniture/blocks/your_block.yml");
     }).catch(err => {
         alert("Ошибка копирования: " + err);
     });
