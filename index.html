@@ -4,14 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MeowFurniture Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/lang.js"></script>
     <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body class="bg-gray-900 text-white p-4">
 <div class="grid grid-cols-2 gap-4 h-screen">
-
     <div class="overflow-y-auto p-4 bg-gray-800 rounded shadow space-y-4">
-        <h2 class="text-xl font-bold">Block properties</h2>
+
+        <div class="flex justify-between items-start">
+            <h2 data-i18n="title" class="text-xl font-bold mb-2">Block properties</h2>
+
+            <!-- Language selector -->
+            <div class="relative inline-block text-left">
+                <select id="languageSelect" class="block appearance-none bg-gray-800 border border-gray-600 text-white py-1 px-3 pr-8 rounded leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="en">English</option>
+                    <option value="ru">Русский</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                    <svg class="fill-current h-4 w-4" viewBox="0 0 20 20">
+                        <path d="M5.516 7.548l4.484 4.482 4.484-4.482L16 8.516l-6 6-6-6z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
 
         <label class="block">
             <span class="text-sm font-medium">Name</span>
@@ -24,11 +42,10 @@
 
             <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="baseType" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   The type of block that will be used as a hitbox, barrier universal
   </span>
             </span>
-
 
             <input id="baseType" type="text" placeholder="barrier" class="mt-1 w-full rounded border p-2 bg-gray-700 text-white" />
         </label>
@@ -38,7 +55,7 @@
         <label><input id="isHat" type="checkbox" class="mr-2" />Is Hat</label>
         <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="hat" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   The player can put a block on his head through the inventory.
   </span>
         </span>
@@ -48,7 +65,7 @@
         <label><input id="isSolid" type="checkbox" class="mr-2" checked/>Is Solid</label>
         <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="solid" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   If disabled, the Base Type will not be used. The block will have a hitbox entity.
   </span>
         </span>
@@ -62,7 +79,7 @@
             <fieldset class="border p-2 rounded">
                 <legend class="text-sm font-medium">Offset <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="offset" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   Offset of hitbox relative to block center
                     </span>
                 </span></legend>
@@ -75,7 +92,7 @@
             <label class="block"><input id="freePlace" type="checkbox" class="mr-2" />Free place
                 <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="freePlace" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   If enabled, the block can be placed anywhere, regardless of the block grid
                     </span>
                 </span>
@@ -93,14 +110,14 @@
                 <input id="destroyTime" type="number" value="2" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" />
                 <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="destroyTime" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   Block destruction time in seconds
                     </span>
                 </span>
             </label>
 
             <label class="block">
-                <span class="text-sm font-medium">Effective instrument</span>
+                <span data-i18n="instrument" class="text-sm font-medium">Effective instrument</span>
                 <select id="effectiveTool" class="mt-1 w-full rounded border p-2 bg-gray-700 text-white">
                     <option value="hoe">hoe</option>
                     <option value="axe">axe</option>
@@ -114,7 +131,7 @@
         <label><input id="isSeat" type="checkbox" class="mr-2" />Is Seat</label>
         <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="seat" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   Will the player be able to sit on this block by pressing RMB
                     </span>
         </span>
@@ -123,8 +140,8 @@
             <legend class="text-sm font-medium">Seat Position
                 <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
-                  The position where the player will sit. 0 0 0 - center of the block
+              <span data-i18n="seatPos" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  The position where the player will sit.<br> 0 0 0 - center of the block
                     </span>
                 </span>
             </legend>
@@ -136,7 +153,7 @@
 
                 <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="seatRotate" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   Will the model rotate to follow the body of a seated player?
                     </span>
                 </span>
@@ -150,7 +167,7 @@
 
                 <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="sidePlace" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   On which sides of the block can this block be placed?
                     </span>
                 </span>
@@ -172,7 +189,7 @@
 
                         <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="modelBlock" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   What item will be displayed when the block is placed
                     </span>
                         </span>
@@ -182,7 +199,7 @@
                     <label>CustomModelData: <input id="modelCmd" type="number" value="0" class="bg-gray-700 text-white p-1 rounded ml-2 flex-right" /></label>
                     <label>color: <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="modelColor" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   Only <b>leather_armor</b> and <b>leather_horse_armor</b> are supported
                     </span>
                     </span><input id="modelColor" type="color" value="#FFFFFF" class="ml-2 flex-right" /></label>
@@ -194,7 +211,7 @@
 
                         <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="modelItem" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   What item will be displayed when the block is in inventory
                     </span>
                         </span></p>
@@ -202,7 +219,7 @@
                     <label>CustomModelData: <input id="itemCmd" type="number" value="0" class="bg-gray-700 text-white p-1 rounded ml-2 flex-right" /></label>
                     <label>color:  <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="modelColor" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   Only <b>leather_armor</b> and <b>leather_horse_armor</b> are supported
                     </span>
                     </span><input id="itemColor" type="color" value="#FFFFFF" class="ml-2 flex-right" /></label>
@@ -212,30 +229,30 @@
             <label>Lore:
                 <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="lore" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   Can be separated with \n for new lines. Leave blank for no lore.
                     </span>
                 </span>
                 <input id="itemLore" type="text" value="Example\n Lore" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
             <br>
 
-            <p class="text-sm font-medium">Properties of the placed block model</p>
+            <p data-i18n="modelProperties" class="text-sm font-medium">Properties of the placed block model</p>
             <div class=" flex-space-around">
                 <fieldset class="border p-2 m-2 rounded grid">
-                    <legend class="text-sm font-medium">Scale</legend>
+                    <legend data-i18n="modelScale" class="text-sm font-medium">Scale</legend>
                     <label class="block">x: <input id="scaleX" type="number" value="1" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
                     <label class="block">y: <input id="scaleY" type="number" value="1" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
                     <label class="block">z: <input id="scaleZ" type="number" value="1" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
                 </fieldset>
 
                 <fieldset class="border p-2 m-2 rounded grid">
-                    <legend class="text-sm font-medium">Rotation</legend>
+                    <legend data-i18n="modelRotation" class="text-sm font-medium">Rotation</legend>
                     <label class="block">yaw: <input id="yaw" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
                     <label class="block">pitch: <input id="pitch" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
                 </fieldset>
 
                 <fieldset class="border p-2 m-2 rounded grid" id="offset">
-                    <legend class="text-sm font-medium">Offset</legend>
+                    <legend data-i18n="modelOffset" class="text-sm font-medium">Offset</legend>
                     <label class="block">x: <input id="offsetX" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
                     <label class="block">y: <input id="offsetY" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
                     <label class="block">z: <input id="offsetZ" type="number" value="0" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
@@ -247,7 +264,7 @@
         <label><input id="isRotates" type="checkbox" class="mr-2" />Is Rotates</label>
         <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="isRotates" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   If enabled, the block will turn towards the player when placed, like a chest for example.
                     </span>
         </span>
@@ -256,7 +273,7 @@
                 <label><input id="rotate45" type="checkbox" class="mr-2" />Rotate by 45°
                     <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="rotate45" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   Rotation similar to heads.
                     </span>
                     </span>
@@ -266,7 +283,7 @@
                 <label><input id="freeRotating" type="checkbox" class="mr-2" />Free rotation
                     <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="rotateFree" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   The model will turn exactly towards the player.
                     </span>
                     </span>
@@ -274,7 +291,7 @@
                 <label><input id="rotateByBlockface" type="checkbox" class="mr-2" />Rotate relative to blockface
                     <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="rotateFace" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   The rotation depends on the side of the block on which this block is placed. Similar to the rotation of the frame or painting
                     </span>
                     </span>
@@ -285,7 +302,7 @@
                     <span class="text-sm font-medium">blockface-binding</span>
                     <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="binding" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   The side of the model that it should be attached to the block. Blockface is specified according to BlockBench
                     </span>
                     </span>
@@ -304,7 +321,7 @@
                     <legend class="text-sm font-medium">Blockface Offset
                         <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="blockOffset" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   Replaces the offset from the Model section. Offsets relative to the side of the block on which this block is placed
                     </span>
                         </span>
@@ -323,7 +340,7 @@
         <label><input id="hasInventory" type="checkbox" class="mr-2" />Has Inventory</label>
         <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="inventory" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   Opens inventory on RMB
                     </span>
         </span>
@@ -333,7 +350,7 @@
             <div style="display: grid">
 
                 <label class="block">
-                    <span class="text-sm font-medium">Number of lines:</span>
+                    <span data-i18n="lines" class="text-sm font-medium">Number of lines:</span>
                     <input
                             id="lines"
                             type="range"
@@ -343,7 +360,7 @@
                             class="w-full mt-1"
                             oninput="this.nextElementSibling.textContent = this.value"
                     />
-                    <span class="ml-2">1</span>
+                    <span id="lines-span" class="ml-2">1</span>
                 </label>
 
                 <label>Inventory name: <input id="invName" type="text" value="&0Inventory Name" class="bg-gray-700 text-white p-1 rounded ml-2 w-full" /></label>
@@ -356,10 +373,10 @@
             <div style="display: grid">
 
                 <label class="block">
-                    <span class="text-sm font-medium">Max Stack:</span>
+                    <span data-i18n="maxStack" class="text-sm font-medium">Max Stack:</span>
                     <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="maxStackTip" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   The maximum stack size of this block. If an item with a maximum stack less than the specified one is used, it will cause an error
                     </span>
                     </span>
@@ -372,7 +389,7 @@
                             class="w-full mt-1"
                             oninput="this.nextElementSibling.textContent = this.value"
                     />
-                    <span class="ml-2">64</span>
+                    <span id="max-stack-span" class="ml-2">64</span>
                 </label>
             </div>
         </fieldset>
@@ -381,7 +398,7 @@
             <legend class="text-sm font-medium">Additional Blocks
                 <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="addBlocks" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   Useful if you want to make a block consisting of several blocks. For example, a sofa three blocks long.<br><br>
                   id - Custom block file name<br>
                   if a block by id is not found, it is skipped<br>
@@ -407,7 +424,7 @@
         <label><input id="hasClickCommands" type="checkbox" class="mr-2" />Has Click Commands</label>
         <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="hasCommands" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   Commands that the console will execute when the player clicks on the block. Placeholders will be executed on behalf of the player who clicked.
               </span>
             </span>
@@ -429,7 +446,7 @@
             <legend class="text-sm font-medium">Recipe
                 <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="recipe" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   Place the symbols in the cells as the items should be placed in the crafting table. Do not fill empty slots.
               </span>
             </span>
@@ -442,18 +459,20 @@
                 </template>
             </div>
 
-            <div id="ingredientsFields">
-                <p class="text-md mt-4 mb-2 font-semibold">Ingredients
-                    <span class="relative">
+            <p class="text-md mt-4 mb-2 font-semibold">Ingredients
+                <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
-                  assign each symbol a spigot material, such as stone, diamond, stick.
+              <span data-i18n="ingredients" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  Assign each symbol a spigot material, such as stone, diamond, stick.
 Or you can use minecraft tags, such as #minecraft:planks, #minecraft:logs, #minecraft:wooden_slabs
               </span>
             </span>
-                </p>
+            </p>
+            <div id="ingredientsFields">
 
             </div>
+            <br>
+            <label class="block m-1">Amount: <input id="amount" type="number" value="1" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" /></label>
         </div>
         </fieldset>
 
@@ -466,7 +485,7 @@ Or you can use minecraft tags, such as #minecraft:planks, #minecraft:logs, #mine
             <label>On Interact:
                 <span class="relative">
               <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
-              <span class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+              <span data-i18n="interactSound" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
                   Plays when the player sits on a block or opens the block's inventory.
               </span>
             </span>
@@ -477,11 +496,19 @@ Or you can use minecraft tags, such as #minecraft:planks, #minecraft:logs, #mine
 
 
     <div class="overflow-y-auto p-4 bg-gray-950 text-green-300 rounded shadow green-scroll">
-        <button onclick="copyToClipboard()" class="absolute top-5 right-5 mt-2 mr-2 bg-black text-green-400 border px-3 py-1 rounded">Скопировать YAML</button>
-
+        <button onclick="copyToClipboard()" class="absolute top-5 right-5 mt-2 mr-2 bg-black text-green-400 border px-3 py-1 rounded">Copy YAML</button>
+        <button onclick="toggleYamlImport()" class="import-button mt-2 mr-2 bg-black text-blue-400 border px-3 py-1 rounded">Import YAML</button>
         <pre id="codeOutput" class="whitespace-pre-wrap"></pre>
     </div>
 </div>
+
+<div id="yamlImportBox" class="hidden bg-gray-900 fixed top-16 right-40 p-4 rounded border shadow w-96 z-50">
+    <p class="text-lg mb-2">Paste YAML:</p>
+    <textarea id="yamlInput" rows="25" class="w-full bg-black text-green-300 p-2 rounded mb-2">name: '&fТест'</textarea>
+    <button onclick="applyYaml()" class="bg-black text-blue-400 border px-4 py-2 rounded">Apply</button>
+    <button onclick="document.getElementById('yamlImportBox').classList.add('hidden');" class="bg-black text-blue-400 border px-4 py-2 rounded">Close</button>
+</div>
+
 <script src="js/script.js"></script>
 
 </body>

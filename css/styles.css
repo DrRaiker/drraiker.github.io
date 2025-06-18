@@ -25,6 +25,12 @@
     width: 160px;
 }
 
+.import-button {
+    position: absolute;
+    top: 20px;
+    right: 132px;
+}
+
 .flex-left {
     display: flex;
     justify-content: flex-start;

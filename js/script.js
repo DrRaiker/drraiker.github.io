@@ -173,7 +173,7 @@ recipe:
 ${shape.join('\n')}
   ingredients:
 ${ingredientsYAML.join('\n')}
-`
+  amount: ${val('amount')}`
     }
 
     yaml = yaml.split('\n')
@@ -199,18 +199,21 @@ const symbolInputs = [];
 const ingredientFields = new Map(); // symbol -> DOM element
 
 // Создаём 9 input-полей
-for (let i = 0; i < 9; i++) {
-    const input = document.createElement("input");
-    input.type = "text";
-    input.maxLength = 1;
-    input.className = "bg-gray-700 text-white p-2 text-center rounded w-12 h-12 symbol-input";
-    symbolInputs.push(input);
+for (let row = 0; row < 3; row++) {
+    for (let col = 0; col < 3; col++) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.id = "gridSymbol_" + row + "_" + col;
+        input.maxLength = 1;
+        input.className = "bg-gray-700 text-white p-2 text-center rounded w-12 h-12 symbol-input";
+        symbolInputs.push(input);
 
-    input.addEventListener("input", () => {
-        updateIngredientFields();
-    });
+        input.addEventListener("input", () => {
+            updateIngredientFields();
+        });
 
-    grid.appendChild(input);
+        grid.appendChild(input);
+    }
 }
 
 function updateIngredientFields() {
@@ -235,7 +238,7 @@ function updateIngredientFields() {
     });
 }
 
-function addIngredientField(symbol) {
+function addIngredientField(symbol, value = '') {
     const wrapper = document.createElement("div");
     wrapper.className = "flex items-center mb-2";
     wrapper.dataset.symbol = symbol;
@@ -248,6 +251,7 @@ function addIngredientField(symbol) {
     input.type = "text";
     input.placeholder = "Spigot material or minecraft tag";
     input.className = "bg-gray-700 text-white p-1 rounded ml-2 w-full";
+    input.value = value;
 
     // ВАЖНО: обновляем YAML при вводе
     input.addEventListener("input", generateCode);
@@ -330,6 +334,195 @@ function copyToClipboard() {
     });
 }
 
+function toggleYamlImport() {
+    const box = document.getElementById('yamlImportBox');
+    box.classList.toggle('hidden');
+}
+
+function applyYaml() {
+    try {
+        const text = document.getElementById('yamlInput').value;
+        const data = jsyaml.load(text);
+
+        // Пример: заполняем только поле name
+        if (data.name) document.getElementById('name').value = data.name;
+        if (data.baseType) document.getElementById('baseType').value = data.baseType;
+
+        document.getElementById('isSolid').checked = data.isSolid;
+        document.getElementById('isSolid').dispatchEvent(new Event("change"));
+
+        document.getElementById('nonSolidWidth').value = data.nonSolid?.width ?? 1;
+        document.getElementById('nonSolidHeight').value = data.nonSolid?.height ?? 1;
+
+        document.getElementById('hitboxX').value = data.nonSolid?.['hitbox-offset']?.x ?? 0;
+        document.getElementById('hitboxY').value = data.nonSolid?.['hitbox-offset']?.y ?? 0;
+        document.getElementById('hitboxZ').value = data.nonSolid?.['hitbox-offset']?.z ?? 0;
+
+        document.getElementById('freePlace').checked = data.nonSolid?.['free-place'] ?? false;
+        document.getElementById('freePlace').dispatchEvent(new Event("change"));
+
+        document.getElementById('canDestroy').checked = data.canDestroy ?? true;
+        document.getElementById('canDestroy').dispatchEvent(new Event("change"));
+
+        document.getElementById('hasDrop').checked = data.hasDrop ?? true;
+        document.getElementById('hasDrop').dispatchEvent(new Event("change"));
+
+        document.getElementById('destroyTime').value = data?.['destroy-time'] ?? 1;
+
+        document.getElementById('effectiveTool').value = data?.effectiveTool ?? 'pickaxe';
+
+        document.getElementById('isSeat').checked = data.isSeat ?? true;
+        document.getElementById('isSeat').dispatchEvent(new Event("change"));
+
+
+        document.getElementById('seatX').value = data.seat.offset?.x ?? 0;
+        document.getElementById('seatY').value = data.seat.offset?.y ?? 0;
+        document.getElementById('seatZ').value = data.seat.offset?.z ?? 0;
+
+        document.getElementById('rotateByPassenger').checked = data.seat?.['rotate-by-passenger'] ?? true;
+        document.getElementById('rotateByPassenger').dispatchEvent(new Event("change"));
+
+
+        document.getElementById('placeNorth').checked = data.canPlace.north ?? false;
+        document.getElementById('placeSouth').checked = data.canPlace.south ?? false;
+        document.getElementById('placeWest').checked = data.canPlace.west ?? false;
+        document.getElementById('placeEast').checked = data.canPlace.east ?? false;
+        document.getElementById('placeUp').checked = data.canPlace.up ?? false;
+        document.getElementById('placeDown').checked = data.canPlace.down ?? false;
+
+
+        document.getElementById('modelId').value = data.model.id;
+        document.getElementById('modelCmd').value = data.model.cmd;
+        document.getElementById('modelColor').value = data.model.color;
+
+        document.getElementById('itemId').value = data.model.itemId;
+        document.getElementById('itemCmd').value = data.model.itemCmd;
+        document.getElementById('itemColor').value = data.model.itemColor;
+
+        document.getElementById('itemLore').value = data.model?.itemLore?.join('\\n') ?? '';
+
+
+        document.getElementById('scaleX').value = data.model.scale.x ?? 1;
+        document.getElementById('scaleY').value = data.model.scale.y ?? 1;
+        document.getElementById('scaleZ').value = data.model.scale.z ?? 1;
+
+        document.getElementById('offsetX').value = data.model.offset.x ?? 1;
+        document.getElementById('offsetY').value = data.model.offset.y ?? 1;
+        document.getElementById('offsetZ').value = data.model.offset.z ?? 1;
+
+        document.getElementById('yaw').value = data.model.rotation.yaw ?? 0;
+        document.getElementById('pitch').value = data.model.rotation.pitch ?? 0;
+
+
+        document.getElementById('isRotates').checked = data.model.isRotates ?? false;
+        document.getElementById('isRotates').dispatchEvent(new Event("change"));
+
+        document.getElementById('rotate45').checked = data.model?.['45-rotating'] ?? false;
+        document.getElementById('rotate45').dispatchEvent(new Event("change"));
+
+        document.getElementById('freeRotating').checked = data.model?.['free-rotating'] ?? false;
+        document.getElementById('freeRotating').dispatchEvent(new Event("change"));
+
+        document.getElementById('rotateByBlockface').checked = data.model?.['rotate-by-blockface'] ?? false;
+        document.getElementById('rotateByBlockface').dispatchEvent(new Event("change"));
+
+
+        document.getElementById('blockfaceBinding').value = data.model?.['blockface-binding'] ?? 'down';
+
+
+        document.getElementById('blockface-offsetX').value = data.model?.['blockface-offset'].x ?? 1;
+        document.getElementById('blockface-offsetY').value = data.model?.['blockface-offset'].y ?? 1;
+        document.getElementById('blockface-offsetZ').value = data.model?.['blockface-offset'].z ?? 1;
+
+
+        document.getElementById('hasInventory').checked = data.hasInventory ?? false;
+        document.getElementById('hasInventory').dispatchEvent(new Event("change"));
+
+        document.getElementById('lines-span').innerHTML = data.inventory?.lines ?? 1;
+        document.getElementById('lines').value = data.inventory?.lines ?? 1;
+        document.getElementById('invName').value = data.inventory?.name ?? "Inventory Name";
+
+
+        document.getElementById('maxStack').value = data.components?.['max_stack_size'] ?? 64;
+        document.getElementById('max-stack-span').innerHTML = data.components?.['max_stack_size'] ?? 64;
+
+        document.getElementById('additionalBlocks').innerHTML = '';
+
+
+        if (data['additional-blocks']) {
+            for (const key in data['additional-blocks']) {
+                const block = data['additional-blocks'][key];
+                const [x, y, z] = block.position?.split(' ').map(Number) || [0, 1, 0];
+                addAdditionalBlock(block.id || '', x, y, z);
+            }
+        }
+
+
+        document.getElementById('hasClickCommands').checked = data.hasClickCommands ?? false;
+        document.getElementById('hasClickCommands').dispatchEvent(new Event("change"));
+
+
+        document.getElementById('clickCommandsContainer').innerHTML = '';
+
+        if (data['clickCommands']) {
+            for (const key in data['clickCommands']) {
+                const block = data['clickCommands'][key];
+                addClickCommand(block);
+            }
+        }
+
+        document.getElementById('hasRecipe').checked = data.hasRecipe ?? false;
+        document.getElementById('hasRecipe').dispatchEvent(new Event("change"));
+
+        for (let row = 0; row < 3; row++) {
+            for (let col = 0; col < 3; col++) {
+                document.getElementById('gridSymbol_' + row + "_" + col).value = '';
+            }
+        }
+
+        ingredientsContainer.innerHTML = '';
+
+        if (data.hasRecipe ?? false) {
+
+            if (data.recipe && Array.isArray(data.recipe.shape)) {
+                data.recipe.shape.forEach((row, rowIndex) => {
+                    // row — это строка, например ' s '
+                    // rowIndex — индекс строки (0, 1, 2)
+
+                    for (let colIndex = 0; colIndex < row.length; colIndex++) {
+                        const symbol = row[colIndex];
+                        // symbol — это один из символов в строке
+                        document.getElementById('gridSymbol_' + rowIndex + "_" + colIndex).value = symbol ?? '';
+                    }
+                });
+            }
+
+            for (const [symbol, value] of Object.entries(data.recipe.ingredients)) {
+                addIngredientField(symbol, value);
+            }
+
+            document.getElementById('amount').value = data.recipe.amount ?? 1;
+
+            document.getElementById('soundPlace').value = data.sounds.place ?? "minecraft:block.stone.place";
+            document.getElementById('soundBreak').value = data.sounds.break ?? "minecraft:block.stone.break";
+            document.getElementById('soundInteract').value = data.sounds.interact ?? "minecraft:block.stone.ui.button.click";
+        }
+
+
+
+        document.getElementById('yamlImportBox').classList.add('hidden');
+        generateCode();
+
+    } catch (err) {
+        document.getElementById('yamlImportBox').classList.add('hidden');
+    }
+}
+function updateTexts() {
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        el.textContent = i18next.t(key);
+    });
+}
 
 window.onload = () => {
     addClickCommand('say %player_name% clicked on the block'); // Значение по умолчанию
@@ -384,5 +577,15 @@ window.onload = () => {
         generateCode();
     });
 
+
+    const savedLang = localStorage.getItem("lang") || "en";
+    document.getElementById("languageSelect").value = savedLang;
+    applyTranslations(savedLang);
+
+    document.getElementById("languageSelect").addEventListener("change", function () {
+        const selectedLang = this.value;
+        localStorage.setItem("lang", selectedLang);
+        applyTranslations(selectedLang);
+    });
 
 };
