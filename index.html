@@ -6,7 +6,7 @@
     <title>MeowFurniture Generator</title>
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="js/lang.js?v=2"></script>
+    <script src="js/lang.js?v=4"></script>
     <link rel="stylesheet" href="css/styles.css?v=2" />
 </head>
 <body class="bg-gray-900 text-white">
@@ -106,6 +106,72 @@
                 </span>
             </label>
 
+        </fieldset>
+
+        <br>
+
+        <label><input id="isOre" type="checkbox" class="mr-2"/>Is Ore</label>
+        <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span data-i18n="solid" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  If disabled, the Base Type will not be used. The block will have a hitbox entity.
+  </span>
+        </span>
+
+        <fieldset class="border p-2 rounded" id="ore-options">
+
+            <label class="block">
+                <span class="text-sm font-medium">Min Height</span>
+                <input id="minHeight" type="number" value="-64" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" />
+                <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span data-i18n="minHeight" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+
+                    </span>
+                </span>
+            </label>
+
+            <label class="block">
+                <span class="text-sm font-medium">Max Height</span>
+                <input id="maxHeight" type="number" value="120" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" />
+                <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span data-i18n="maxHeight" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+
+                    </span>
+                </span>
+            </label>
+
+            <label class="block">
+                <span class="text-sm font-medium">Max Vein Block</span>
+                <input id="maxBlocks" type="number" value="10" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" />
+                <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span data-i18n="maxBlocks" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+
+                    </span>
+                </span>
+            </label>
+
+            <label class="block">
+                <span class="text-sm font-medium">Max Veins in Chunk</span>
+                <input id="maxVeins" type="number" value="3" class="w-16 ml-2 bg-gray-700 text-white p-1 rounded" />
+                <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span data-i18n="maxVeins" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+
+                    </span>
+                </span>
+            </label>
+
+            <label class="block">
+                <span data-i18n="dimension" class="text-sm font-medium">Dimension</span>
+                <select id="dimension" class="mt-1 w-full rounded border p-2 bg-gray-700 text-white">
+                    <option value="normal" selected>normal</option>
+                    <option value="nether">nether</option>
+                    <option value="the_end">the_end</option>
+                </select>
+            </label>
         </fieldset>
 
         <label class="block"><input id="canDestroy" type="checkbox" checked class="mr-2" />Destructible</label>
@@ -520,6 +586,6 @@ Or you can use minecraft tags, such as #minecraft:planks, #minecraft:logs, #mine
     <button onclick="document.getElementById('yamlImportBox').classList.add('hidden');" class="bg-black text-blue-400 border px-4 py-2 rounded">Close</button>
 
 </div>
-<script src="js/script.js?v=2"></script>
+<script src="js/script.js?v=4"></script>
 </body>
 </html>

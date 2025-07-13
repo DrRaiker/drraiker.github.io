@@ -39,6 +39,11 @@ const translations = {
         ingredients: "Назначьте каждому символу spigot материал, например, stone, diamond, stick.\n" +
             "Или вы можете использовать теги minecraft, например, #minecraft:planks, #minecraft:logs, #minecraft:wooden_slabs",
         interactSound: "Воспроизводится, когда игрок садится на блок или открывает инвентарь блока.",
+        dimension: "Измерение",
+        minHeight: "Минимальная высота на которой сможет появится эта руда",
+        maxHeight: "Максимальная высота на которой сможет появится эта руда",
+        maxBlocks: "Максимальное количество блоков в одной жиле этой руды",
+        maxVeins: "Максимальное количество жил на один чанк",
         emmmm: "",
 
         cancel: "Отмена"
@@ -83,6 +88,11 @@ const translations = {
         ingredients: "Assign each symbol a spigot material, such as stone, diamond, stick.\n" +
             "Or you can use minecraft tags, such as #minecraft:planks, #minecraft:logs, #minecraft:wooden_slabs",
         interactSound: "Plays when the player sits on a block or opens the block's inventory.",
+        dimension: "Dimension",
+        minHeight: "Minimum height where this ore can spawn",
+        maxHeight: "Maximum height where this ore can spawn",
+        maxBlocks: "Maximum number of blocks in one vein of this ore",
+        maxVeins: "Maximum number of veins per chunk",
 
         cancel: "Отмена"
     },
@@ -126,6 +136,11 @@ const translations = {
         ingredients: "Призначте кожному символу матеріал Spigot, наприклад stone, diamond, stick.\n" +
             "Або можна використовувати теги Minecraft, наприклад, #minecraft:planks, #minecraft:logs, #minecraft:wooden_slabs",
         interactSound: "Відтворюється, коли гравець сідає на блок або відкриває його інвентар.",
+        dimension: "Вимір",
+        minHeight: "Мінімальна висота, на якій може з'явитися ця руда",
+        maxHeight: "Максимальна висота, на якій може з'явитися ця руда",
+        maxBlocks: "Максимальна кількість блоків в одній жилі цієї руди",
+        maxVeins: "Максимальна кількість жил на один чанк",
         emmmm: "",
         cancel: "Скасувати"
     },
@@ -169,6 +184,11 @@ const translations = {
         ingredients: "Asigna a cada símbolo un material Spigot, como stone, diamond, stick.\n" +
             "O puedes usar etiquetas de Minecraft, como #minecraft:planks, #minecraft:logs, #minecraft:wooden_slabs",
         interactSound: "Se reproduce cuando el jugador se sienta en el bloque o abre su inventario.",
+        dimension: "Dimensión",
+        minHeight: "Altura mínima donde puede aparecer este mineral",
+        maxHeight: "Altura máxima donde puede aparecer este mineral",
+        maxBlocks: "Cantidad máxima de bloques en una veta de este mineral",
+        maxVeins: "Cantidad máxima de vetas por chunk",
         emmmm: "",
         cancel: "Cancelar"
     },
@@ -212,6 +232,11 @@ const translations = {
         ingredients: "Weise jedem Symbol ein Spigot-Material zu, z.B. stone, diamond, stick.\n" +
             "Oder verwende Minecraft-Tags wie #minecraft:planks, #minecraft:logs, #minecraft:wooden_slabs",
         interactSound: "Wird abgespielt, wenn der Spieler auf dem Block sitzt oder dessen Inventar öffnet.",
+        dimension: "Dimension",
+        minHeight: "Minimale Höhe, auf der dieses Erz erscheinen kann",
+        maxHeight: "Maximale Höhe, auf der dieses Erz erscheinen kann",
+        maxBlocks: "Maximale Anzahl an Blöcken in einem Erzvorkommen",
+        maxVeins: "Maximale Anzahl an Vorkommen pro Chunk",
 
         cancel: "Abbrechen"
     },
@@ -255,6 +280,11 @@ const translations = {
         ingredients: "Прызначце кожнаму сімвалу матэрыял Spigot, напрыклад stone, diamond, stick.\n" +
             "Або выкарыстоўвайце тэгі Minecraft, напрыклад #minecraft:planks, #minecraft:logs, #minecraft:wooden_slabs",
         interactSound: "Гучыць, калі гулец садзіцца на блок або адкрывае інвентар блока.",
+        dimension: "Вымярэнне",
+        minHeight: "Мінімальная вышыня, на якой можа з'явіцца гэтая руда",
+        maxHeight: "Максімальная вышыня, на якой можа з'явіцца гэтая руда",
+        maxBlocks: "Максімальная колькасць блокаў у адной жиле гэтай руды",
+        maxVeins: "Максімальная колькасць жил на адзін чанк",
         cancel: "Адмена"
     }
 

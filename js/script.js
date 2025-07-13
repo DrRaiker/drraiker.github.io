@@ -33,8 +33,8 @@ ${bool('placeNorth') ? `  north: ${bool('placeNorth')}` : ''}${bool('placeSouth'
   down: ${bool('placeDown')}` : ''}` : ''}
 
 
-isSeat: ${bool('isSeat')}
 ${bool('isSeat') ? `
+isSeat: ${bool('isSeat')}
 seat:
   offset:
     x: ${num('seatX')}
@@ -75,6 +75,19 @@ ${bool('rotateByBlockface') ? `
 ${(val('itemLore') || ' ').split('\\n').map(i => `  - '${i.trim()}\'`).join('\n')}
 ${bool('isHat') ? `
   isHat: ${bool('isHat')}` : ''}
+
+${bool('isOre') ? `
+isOre: ${bool('isOre')}
+ore:
+  height: 
+    min: ${num('minHeight')}
+    max: ${num('maxHeight')}
+  max-blocks-in-vein: ${num('maxBlocks')}
+  max-veins-in-chunk: ${num('maxVeins')}
+  dimension: ${val('dimension')}
+  
+  ` : ''}
+  
 ${bool('hasInventory') ? `
 hasInventory: ${bool('hasInventory')}
 inventory:
@@ -371,6 +384,15 @@ function applyYaml() {
 
         document.getElementById('effectiveTool').value = data?.effectiveTool ?? 'pickaxe';
 
+
+        document.getElementById('isOre').checked = data.isOre ?? false;
+        document.getElementById('isOre').dispatchEvent(new Event("change"));
+        document.getElementById('minHeight').value = data.ore?.height?.min ?? -64;
+        document.getElementById('maxHeight').value = data.ore?.height?.max ?? 120;
+        document.getElementById('maxBlocks').value = data.ore?.['max-blocks-in-vein'] ?? 10;
+        document.getElementById('maxVeins').value = data.ore?.['max-veins-in-chunk'] ?? 3;
+        document.getElementById('dimension').value = data.ore?.dimension ?? "normal";
+
         document.getElementById('isSeat').checked = data.isSeat ?? true;
         document.getElementById('isSeat').dispatchEvent(new Event("change"));
 
@@ -506,6 +528,7 @@ function applyYaml() {
             document.getElementById('soundPlace').value = data.sounds.place ?? "minecraft:block.stone.place";
             document.getElementById('soundBreak').value = data.sounds.break ?? "minecraft:block.stone.break";
             document.getElementById('soundInteract').value = data.sounds.interact ?? "minecraft:block.stone.ui.button.click";
+
         }
 
 
@@ -517,13 +540,6 @@ function applyYaml() {
         document.getElementById('yamlImportBox').classList.add('hidden');
     }
 }
-function updateTexts() {
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        el.textContent = i18next.t(key);
-    });
-}
-
 window.onload = () => {
     addClickCommand('say %player_name% clicked on the block'); // Значение по умолчанию
     generateCode();
@@ -536,6 +552,7 @@ window.onload = () => {
     toggleOptions('hasInventory', ["inv-options"]);
     toggleOptions('hasClickCommands', ["clickCommands"]);
     toggleOptions('hasRecipe', ["recipe-options"]);
+    toggleOptions('isOre', ["ore-options"]);
     setupAutoUpdate()
 
     document.getElementById('isRotates').addEventListener('change', () => {
@@ -574,6 +591,10 @@ window.onload = () => {
     });
     document.getElementById('hasRecipe').addEventListener('change', () => {
         toggleOptions('hasRecipe', ["recipe-options"]);
+        generateCode();
+    });
+    document.getElementById('isOre').addEventListener('change', () => {
+        toggleOptions('isOre', ["ore-options"]);
         generateCode();
     });
 
