@@ -384,6 +384,7 @@ function applyYaml() {
 
         document.getElementById('effectiveTool').value = data?.effectiveTool ?? 'pickaxe';
 
+        document.getElementById('itemLore').value = (data.model?.itemLore ?? '').join("\\n");
 
         document.getElementById('isOre').checked = data.isOre ?? false;
         document.getElementById('isOre').dispatchEvent(new Event("change"));
@@ -420,8 +421,6 @@ function applyYaml() {
         document.getElementById('itemId').value = data.model.itemId;
         document.getElementById('itemCmd').value = data.model.itemCmd;
         document.getElementById('itemColor').value = data.model.itemColor;
-
-        document.getElementById('itemLore').value = data.model?.itemLore?.join('\\n') ?? '';
 
 
         document.getElementById('scaleX').value = data.model.scale.x ?? 1;
