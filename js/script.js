@@ -20,9 +20,14 @@ nonSolid:
 canDestroy: ${bool('canDestroy')}
 ${bool('canDestroy') ? `
 destroy-time: ${num('destroyTime')}
-hasDrop: ${bool('hasDrop')}
 effectiveTool: ${val('effectiveTool') || 'pickaxe'}` : ''}
-
+${bool('hasDrop') ? `
+hasDrop: ${bool('hasDrop')}
+${bool('requireTool') ? `
+requireTool: ${bool('requireTool')}
+requireToolMaterial: ${val('effectiveMaterial') || 'wooden'}
+` : ''}
+` : ''}
 ${bool('placeNorth') || bool('placeSouth') || bool('placeWest') || bool('placeEast') || bool('placeUp') || bool('placeDown') ? `
 canPlace:
 ${bool('placeNorth') ? `  north: ${bool('placeNorth')}` : ''}${bool('placeSouth') ? `
@@ -110,8 +115,10 @@ sounds:
         return `  '${i + 1}':\n    id: ${id}\n    position: ${x} ${y} ${z}`;
     }).join('\n');
 
-    yaml += `\nadditional-blocks:\n${additionalBlocks || "  '1':\n    id: none\n    position: 0 1 0"}`;
+    if (additionalBlocks.length !== 0 && additionalBlocks !== "  '1':\n    id: none\n    position: 0 1 0") {
 
+        yaml += `\nadditional-blocks:\n${additionalBlocks || "  '1':\n    id: none\n    position: 0 1 0"}`;
+    }
     if (bool('hasClickCommands')) {
         const commandInputs = [...document.querySelectorAll('.commandInput')]
             .map(input => input.value.trim())
@@ -341,7 +348,7 @@ function copyToClipboard() {
     const text = document.getElementById("codeOutput").textContent;
 
     navigator.clipboard.writeText(text).then(() => {
-        alert("Скопировано в буфер обмена!\nВставьте этот текст в MeowFurniture/blocks/your_block.yml");
+        document.getElementById('popup').classList.add("show");
     }).catch(err => {
         alert("Ошибка копирования: " + err);
     });
@@ -352,9 +359,19 @@ function toggleYamlImport() {
     box.classList.toggle('hidden');
 }
 
-function applyYaml() {
+function toggleExamples() {
+    const box = document.getElementById('examplesBox');
+    box.classList.toggle('hidden');
+}
+
+function loadExample(name) {
+    document.getElementById('examplesBox').classList.add('hidden');
+    applyYaml(examples[name])
+
+
+}
+function applyYaml(text) {
     try {
-        const text = document.getElementById('yamlInput').value;
         const data = jsyaml.load(text);
 
         // Пример: заполняем только поле name
@@ -380,6 +397,11 @@ function applyYaml() {
         document.getElementById('hasDrop').checked = data.hasDrop ?? true;
         document.getElementById('hasDrop').dispatchEvent(new Event("change"));
 
+        document.getElementById('requireTool').checked = data.requireTool ?? false;
+        document.getElementById('requireTool').dispatchEvent(new Event("change"));
+
+        document.getElementById('effectiveMaterial').value = data.requireToolMaterial ?? "wooden";
+
         document.getElementById('destroyTime').value = data?.['destroy-time'] ?? 1;
 
         document.getElementById('effectiveTool').value = data?.effectiveTool ?? 'pickaxe';
@@ -394,7 +416,7 @@ function applyYaml() {
         document.getElementById('maxVeins').value = data.ore?.['max-veins-in-chunk'] ?? 3;
         document.getElementById('dimension').value = data.ore?.dimension ?? "normal";
 
-        document.getElementById('isSeat').checked = data.isSeat ?? true;
+        document.getElementById('isSeat').checked = data.isSeat ?? false;
         document.getElementById('isSeat').dispatchEvent(new Event("change"));
 
 
@@ -552,6 +574,8 @@ window.onload = () => {
     toggleOptions('hasClickCommands', ["clickCommands"]);
     toggleOptions('hasRecipe', ["recipe-options"]);
     toggleOptions('isOre', ["ore-options"]);
+    toggleOptions('requireTool', ["tool-options"]);
+    toggleOptions('hasDrop', ["drop-options"]);
     setupAutoUpdate()
 
     document.getElementById('isRotates').addEventListener('change', () => {
@@ -592,8 +616,19 @@ window.onload = () => {
         toggleOptions('hasRecipe', ["recipe-options"]);
         generateCode();
     });
+
     document.getElementById('isOre').addEventListener('change', () => {
         toggleOptions('isOre', ["ore-options"]);
+        generateCode();
+    });
+
+    document.getElementById('requireTool').addEventListener('change', () => {
+        toggleOptions('requireTool', ["tool-options"]);
+        generateCode();
+    });
+
+    document.getElementById('hasDrop').addEventListener('change', () => {
+        toggleOptions('hasDrop', ["drop-options"]);
         generateCode();
     });
 

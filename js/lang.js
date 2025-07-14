@@ -44,6 +44,15 @@ const translations = {
         maxHeight: "Максимальная высота на которой сможет появится эта руда",
         maxBlocks: "Максимальное количество блоков в одной жиле этой руды",
         maxVeins: "Максимальное количество жил на один чанк",
+        copied: "Скопировано в буфер обмена!",
+        copiedSub: "Вставьте этот текст в MeowFurniture/blocks/your_block.yml",
+        selectExample: "Выберите Блок-Пример",
+        exSeat: "Стул ступеньки",
+        exOre: "Руда",
+        exPainting: "Картина",
+        requireTool: "Нужен ли выбранный ранее инструмент для выпадения блока",
+        effectiveMaterial: "Эффективный материал инструмента",
+        effectiveMaterialText: "Минимальный материал инструмента нужный для выпадения блока",
         emmmm: "",
 
         cancel: "Отмена"
@@ -93,8 +102,17 @@ const translations = {
         maxHeight: "Maximum height where this ore can spawn",
         maxBlocks: "Maximum number of blocks in one vein of this ore",
         maxVeins: "Maximum number of veins per chunk",
+        copied: "Copied to clipboard!",
+        copiedSub: "Paste this text into MeowFurniture/blocks/your_block.yml",
+        selectExample: "Select Example Block",
+        exSeat: "Stairs Seat",
+        exOre: "Ore",
+        exPainting: "Painting",
+        requireTool: "Whether the previously selected tool is required for the block to drop",
+        effectiveMaterial: "Effective tool material",
+        effectiveMaterialText: "The minimum tool material required for the block to drop",
 
-        cancel: "Отмена"
+        cancel: "cancel"
     },
     uk: {
         title: "Властивості блоку",
@@ -141,6 +159,15 @@ const translations = {
         maxHeight: "Максимальна висота, на якій може з'явитися ця руда",
         maxBlocks: "Максимальна кількість блоків в одній жилі цієї руди",
         maxVeins: "Максимальна кількість жил на один чанк",
+        copied: "Скопійовано до буфера обміну!",
+        copiedSub: "Вставте цей текст у MeowFurniture/blocks/your_block.yml",
+        selectExample: "Вибрати приклад блоку",
+        exSeat: "Сидіння на сходах",
+        exOre: "Руда",
+        exPainting: "Картина",
+        requireTool: "Чи потрібен раніше вибраний інструмент для випадіння блоку",
+        effectiveMaterial: "Ефективний матеріал інструменту",
+        effectiveMaterialText: "Мінімальний матеріал інструменту, потрібний для випадіння блоку",
         emmmm: "",
         cancel: "Скасувати"
     },
@@ -189,6 +216,15 @@ const translations = {
         maxHeight: "Altura máxima donde puede aparecer este mineral",
         maxBlocks: "Cantidad máxima de bloques en una veta de este mineral",
         maxVeins: "Cantidad máxima de vetas por chunk",
+        copied: "¡Copiado al portapapeles!",
+        copiedSub: "Pega este texto en MeowFurniture/blocks/your_block.yml",
+        selectExample: "Seleccionar bloque de ejemplo",
+        exSeat: "Asiento de escaleras",
+        exOre: "Mena",
+        exPainting: "Cuadro",
+        requireTool: "Si se requiere la herramienta seleccionada previamente para que caiga el bloque",
+        effectiveMaterial: "Material efectivo de la herramienta",
+        effectiveMaterialText: "El material mínimo de herramienta requerido para que caiga el bloque",
         emmmm: "",
         cancel: "Cancelar"
     },
@@ -237,7 +273,15 @@ const translations = {
         maxHeight: "Maximale Höhe, auf der dieses Erz erscheinen kann",
         maxBlocks: "Maximale Anzahl an Blöcken in einem Erzvorkommen",
         maxVeins: "Maximale Anzahl an Vorkommen pro Chunk",
-
+        copied: "In die Zwischenablage kopiert!",
+        copiedSub: "Füge diesen Text in MeowFurniture/blocks/your_block.yml ein",
+        selectExample: "Beispielformat auswählen",
+        exSeat: "Treppensitz",
+        exOre: "Erz",
+        exPainting: "Gemälde",
+        requireTool: "Ob das zuvor ausgewählte Werkzeug zum Droppen des Blocks benötigt wird",
+        effectiveMaterial: "Effektives Werkzeugmaterial",
+        effectiveMaterialText: "Das minimale Werkzeugmaterial, das zum Droppen des Blocks benötigt wird",
         cancel: "Abbrechen"
     },
     be: {
@@ -285,6 +329,15 @@ const translations = {
         maxHeight: "Максімальная вышыня, на якой можа з'явіцца гэтая руда",
         maxBlocks: "Максімальная колькасць блокаў у адной жиле гэтай руды",
         maxVeins: "Максімальная колькасць жил на адзін чанк",
+        copied: "Скапіявана ў буфер абмену!",
+        copiedSub: "Устаўце гэты тэкст у MeowFurniture/blocks/your_block.yml",
+        selectExample: "Выбраць прыклад блока",
+        exSeat: "Сядзенне на прыступках",
+        exOre: "Руда",
+        exPainting: "Карціна",
+        requireTool: "Ці патрабуецца раней выбраны інструмент для выпадзення блока",
+        effectiveMaterial: "Эфектыўны матэрыял інструмента",
+        effectiveMaterialText: "Мінімальны матэрыял інструмента, неабходны для выпадзення блока",
         cancel: "Адмена"
     }
 

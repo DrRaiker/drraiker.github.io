@@ -28,14 +28,34 @@
     right: 270px;
 }
 
+#examplesBox {
+    position: fixed;
+    top: 20px;
+    right: 370px;
+}
+
 #shapeGrid {
     width: 160px;
+}
+
+.example-option-button {
+    margin: 5px;
+    padding: 5px;
+    border: solid white 1px;
+    border-radius: 7px;
+    background: #1f2937;
 }
 
 .import-button {
     position: absolute;
     top: 76px;
     right: 132px;
+}
+
+.example-button {
+    position: absolute;
+    top: 76px;
+    right: 255px;
 }
 
 header {
@@ -66,4 +86,43 @@ header {
 
 .grid {
     display: grid;
+}
+
+.popup.background {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background: radial-gradient(farthest-corner at center, rgba(0,129,106,0.75) 0%, rgba(163,255,195,0.11) 60%, transparent 100%);
+    font-size: 18px;
+    text-align: center;
+    opacity: 0;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 100;
+    width: 120%;
+    height: 120%;
+}
+
+.popup.show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.popup .box {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background: #111827;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    padding: 10px;
+    border: solid 1px white;
+}
+
+.popup .box p{
+    font-size: 15px;
+    color: #c8c8c8;
 }
