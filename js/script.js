@@ -139,7 +139,7 @@ sounds:
         const ingredientsYAML = [];
         ingredientFields.forEach((wrapper, symbol) => {
             const value = wrapper.querySelector("input").value || "air";
-            ingredientsYAML.push(`    ${symbol}: ${value}`);
+            ingredientsYAML.push(`    ${symbol}: '${value}'`);
         });
 
         let startIndex = 5
@@ -301,6 +301,7 @@ function toggleOptions(elstr, arr, negative = false) {
     });
 }
 
+
 function addClickCommand(value = '') {
     const container = document.getElementById("clickCommandsContainer");
 
@@ -344,11 +345,31 @@ function addAdditionalBlock(idValue = '', x = 0, y = 1, z = 0) {
     additionalBlockIndex++;
 }
 
+function hidePopup() {
+    const box = document.getElementById('popup');
+    box.style.opacity = '0';
+    box.style.transform = 'translate(-50%, -50%) scale(1)';
+    box.addEventListener('transitionend', function handler() {
+        box.style.display = 'none';
+        box.removeEventListener('transitionend', handler);
+    });
+}
+
+function showPopup() {
+    const box = document.getElementById('popup');
+    box.style.display = 'block';
+    box.style.transform = 'translate(-50%, -50%) scale(1.1)';
+    requestAnimationFrame(() => {
+        box.style.transform = 'translate(-50%, -50%) scale(1.1)';
+        box.style.opacity = '1';
+    });
+}
+
 function copyToClipboard() {
     const text = document.getElementById("codeOutput").textContent;
 
     navigator.clipboard.writeText(text).then(() => {
-        document.getElementById('popup').classList.add("show");
+        showPopup()
     }).catch(err => {
         alert("Ошибка копирования: " + err);
     });
@@ -378,12 +399,13 @@ function importYaml() {
 }
 function applyYaml(text) {
     try {
+
         const data = jsyaml.load(text);
 
         document.getElementById('name').value = data.name;
         document.getElementById('baseType').value = data.baseType;
 
-        document.getElementById('isSolid').checked = data.isSolid;
+        document.getElementById('isSolid').checked = data.isSolid ?? false;
         document.getElementById('isSolid').dispatchEvent(new Event("change"));
 
         document.getElementById('nonSolidWidth').value = data.nonSolid?.width ?? 1;
@@ -424,21 +446,19 @@ function applyYaml(text) {
         document.getElementById('isSeat').checked = data.isSeat ?? false;
         document.getElementById('isSeat').dispatchEvent(new Event("change"));
 
-
-        document.getElementById('seatX').value = data.seat.offset?.x ?? 0;
-        document.getElementById('seatY').value = data.seat.offset?.y ?? 0;
-        document.getElementById('seatZ').value = data.seat.offset?.z ?? 0;
+        document.getElementById('seatX').value = data.seat?.offset?.x ?? 0;
+        document.getElementById('seatY').value = data.seat?.offset?.y ?? 0;
+        document.getElementById('seatZ').value = data.seat?.offset?.z ?? 0;
 
         document.getElementById('rotateByPassenger').checked = data.seat?.['rotate-by-passenger'] ?? true;
         document.getElementById('rotateByPassenger').dispatchEvent(new Event("change"));
 
-
-        document.getElementById('placeNorth').checked = data.canPlace.north ?? false;
-        document.getElementById('placeSouth').checked = data.canPlace.south ?? false;
-        document.getElementById('placeWest').checked = data.canPlace.west ?? false;
-        document.getElementById('placeEast').checked = data.canPlace.east ?? false;
-        document.getElementById('placeUp').checked = data.canPlace.up ?? false;
-        document.getElementById('placeDown').checked = data.canPlace.down ?? false;
+        document.getElementById('placeNorth').checked = data?.canPlace?.north ?? false;
+        document.getElementById('placeSouth').checked = data?.canPlace?.south ?? false;
+        document.getElementById('placeWest').checked = data?.canPlace?.west ?? false;
+        document.getElementById('placeEast').checked = data?.canPlace?.east ?? false;
+        document.getElementById('placeUp').checked = data?.canPlace?.up ?? false;
+        document.getElementById('placeDown').checked = data?.canPlace?.down ?? false;
 
 
         document.getElementById('modelId').value = data.model?.id;
@@ -450,19 +470,19 @@ function applyYaml(text) {
         document.getElementById('itemColor').value = data.model?.itemColor;
 
 
-        document.getElementById('scaleX').value = data.model.scale.x ?? 1;
-        document.getElementById('scaleY').value = data.model.scale.y ?? 1;
-        document.getElementById('scaleZ').value = data.model.scale.z ?? 1;
+        document.getElementById('scaleX').value = data.model?.scale?.x ?? 1;
+        document.getElementById('scaleY').value = data.model?.scale?.y ?? 1;
+        document.getElementById('scaleZ').value = data.model?.scale?.z ?? 1;
 
-        document.getElementById('offsetX').value = data.model.offset.x ?? 1;
-        document.getElementById('offsetY').value = data.model.offset.y ?? 1;
-        document.getElementById('offsetZ').value = data.model.offset.z ?? 1;
+        document.getElementById('offsetX').value = data.model?.offset?.x ?? 1;
+        document.getElementById('offsetY').value = data.model?.offset?.y ?? 1;
+        document.getElementById('offsetZ').value = data.model?.offset?.z ?? 1;
 
-        document.getElementById('yaw').value = data.model.rotation.yaw ?? 0;
-        document.getElementById('pitch').value = data.model.rotation.pitch ?? 0;
+        document.getElementById('yaw').value = data.model?.rotation?.yaw ?? 0;
+        document.getElementById('pitch').value = data.model?.rotation?.pitch ?? 0;
 
 
-        document.getElementById('isRotates').checked = data.model.isRotates ?? false;
+        document.getElementById('isRotates').checked = data.model?.isRotates ?? false;
         document.getElementById('isRotates').dispatchEvent(new Event("change"));
 
         document.getElementById('rotate45').checked = data.model?.['45-rotating'] ?? false;
@@ -478,9 +498,9 @@ function applyYaml(text) {
         document.getElementById('blockfaceBinding').value = data.model?.['blockface-binding'] ?? 'down';
 
 
-        document.getElementById('blockface-offsetX').value = data.model?.['blockface-offset'].x ?? 1;
-        document.getElementById('blockface-offsetY').value = data.model?.['blockface-offset'].y ?? 1;
-        document.getElementById('blockface-offsetZ').value = data.model?.['blockface-offset'].z ?? 1;
+        document.getElementById('blockface-offsetX').value = data.model?.['blockface-offset']?.x ?? 0;
+        document.getElementById('blockface-offsetY').value = data.model?.['blockface-offset']?.y ?? 0;
+        document.getElementById('blockface-offsetZ').value = data.model?.['blockface-offset']?.z ?? 0;
 
 
         document.getElementById('hasInventory').checked = data.hasInventory ?? false;
@@ -534,28 +554,25 @@ function applyYaml(text) {
 
             if (data.recipe && Array.isArray(data.recipe.shape)) {
                 data.recipe.shape.forEach((row, rowIndex) => {
-                    // row — это строка, например ' s '
-                    // rowIndex — индекс строки (0, 1, 2)
 
                     for (let colIndex = 0; colIndex < row.length; colIndex++) {
                         const symbol = row[colIndex];
-                        // symbol — это один из символов в строке
                         document.getElementById('gridSymbol_' + rowIndex + "_" + colIndex).value = symbol ?? '';
                     }
                 });
             }
 
-            for (const [symbol, value] of Object.entries(data.recipe.ingredients)) {
+            for (const [symbol, value] of Object.entries(data.recipe?.ingredients)) {
                 addIngredientField(symbol, value);
             }
 
-            document.getElementById('amount').value = data.recipe.amount ?? 1;
-
-            document.getElementById('soundPlace').value = data.sounds.place ?? "minecraft:block.stone.place";
-            document.getElementById('soundBreak').value = data.sounds.break ?? "minecraft:block.stone.break";
-            document.getElementById('soundInteract').value = data.sounds.interact ?? "minecraft:block.stone.ui.button.click";
-
+            document.getElementById('amount').value = data.recipe?.amount ?? 1;
         }
+
+        document.getElementById('soundPlace').value = data.sounds?.place ?? "minecraft:block.stone.place";
+        document.getElementById('soundBreak').value = data.sounds?.break ?? "minecraft:block.stone.break";
+        document.getElementById('soundInteract').value = data.sounds?.interact ?? "minecraft:block.stone.ui.button.click";
+
 
 
 
@@ -565,6 +582,7 @@ function applyYaml(text) {
     } catch (err) {}
 }
 window.onload = () => {
+
     addClickCommand('say %player_name% clicked on the block'); // Значение по умолчанию
     generateCode();
 

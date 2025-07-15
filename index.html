@@ -6,8 +6,8 @@
     <title>MeowFurniture Generator</title>
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="js/lang.js?v=5"></script>
-    <link rel="stylesheet" href="css/styles.css?v=3" />
+    <script src="js/lang.js?v=7"></script>
+    <link rel="stylesheet" href="css/styles.css?v=5" />
 </head>
 <body class="bg-gray-900 text-white">
 <header>
@@ -621,7 +621,7 @@ Or you can use minecraft tags, such as #minecraft:planks, #minecraft:logs, #mine
     <button onclick="document.getElementById('yamlImportBox').classList.add('hidden');" class="bg-black text-blue-400 border px-4 py-2 rounded">Close</button>
 
 </div>
-<script src="js/examples.js?v=2"></script>
+<script src="js/examples.js?v=4"></script>
 
 <div id="examplesBox" class="hidden bg-gray-900 p-4 rounded border shadow w-96 z-50">
     <p class="text-lg mb-2" data-i18n="selectExample">Select Example Block:</p>
@@ -629,19 +629,25 @@ Or you can use minecraft tags, such as #minecraft:planks, #minecraft:logs, #mine
         <button onclick="loadExample('seat')" class="example-option-button" data-i18n="exSeat" >Stairs Seat</button>
         <button onclick="loadExample('ore')" class="example-option-button" data-i18n="exOre" >Ore</button>
         <button onclick="loadExample('painting')" class="example-option-button" data-i18n="exPainting" >Painting</button>
+        <button onclick="loadExample('drawer')" class="example-option-button" data-i18n="exDrawer" >Drawer</button>
+        <button onclick="loadExample('hanging_drawer')" class="example-option-button" data-i18n="exHangingDrawer" >Hanging Drawer</button>
+        <button onclick="loadExample('flower')" class="example-option-button" data-i18n="exFlower" ></button>
+        <button onclick="loadExample('flowerFree')" class="example-option-button" data-i18n="exFlowerFree" ></button>
+        <button onclick="loadExample('triple_chair')" class="example-option-button" data-i18n="exTripleChair" ></button>
+        <button onclick="loadExample('triple_chair_part')" class="example-option-button" data-i18n="exTripleChairPart" ></button>
     </div>
         <div class="flex-right">
             <button onclick="document.getElementById('examplesBox').classList.add('hidden');" class="bg-black text-blue-400 border px-4 py-2 mt-1 rounded">Close</button>
         </div>
 </div>
 
-<div class="popup background" onclick='document.getElementById("popup").classList.remove("show")' id="popup">
+<div class="popup background" onclick='hidePopup()' id="popup">
     <div class="box">
         <h1 data-i18n="copied" class="text-xl font-bold mb-2">Скопировано в буфер обмена!</h1>
         <p data-i18n="copiedSub">Вставьте этот текст в MeowFurniture/blocks/your_block.yml</p>
     </div>
 </div>
 
-<script src="js/script.js?v=7"></script>
+<script src="js/script.js?v=9"></script>
 </body>
 </html>

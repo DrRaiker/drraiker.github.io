@@ -96,20 +96,16 @@ header {
     font-size: 18px;
     text-align: center;
     opacity: 0;
-    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
-    transform: translate(-50%, -50%) scale(0);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    display: none;
+    transform: translate(-50%, -50%) scale(100%);
     z-index: 100;
     width: 120%;
     height: 120%;
 }
 
-.popup.show {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-}
-
 .popup .box {
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%);
     opacity: 1;
     position: fixed;
     top: 50%;

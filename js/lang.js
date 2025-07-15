@@ -53,6 +53,10 @@ const translations = {
         requireTool: "Нужен ли выбранный ранее инструмент для выпадения блока",
         effectiveMaterial: "Эффективный материал инструмента",
         effectiveMaterialText: "Минимальный материал инструмента нужный для выпадения блока",
+        exFlower: "Цветок",
+        exFlowerFree: "Цветок (Free place)",
+        exTripleChair: "Тройной стул",
+        exTripleChairPart: "triple_chair_part (Нужен для тройного стула)",
         emmmm: "",
 
         cancel: "Отмена"
@@ -108,9 +112,15 @@ const translations = {
         exSeat: "Stairs Seat",
         exOre: "Ore",
         exPainting: "Painting",
+        exDrawer: "Drawer",
+        exHangingDrawer: "Hanging Drawer",
         requireTool: "Whether the previously selected tool is required for the block to drop",
         effectiveMaterial: "Effective tool material",
         effectiveMaterialText: "The minimum tool material required for the block to drop",
+        exFlower: "Flower",
+        exFlowerFree: "Flower (Free place)",
+        exTripleChair: "Triple Chair",
+        exTripleChairPart: "triple_chair_part (Need for Triple Chair)",
 
         cancel: "cancel"
     },
@@ -168,6 +178,11 @@ const translations = {
         requireTool: "Чи потрібен раніше вибраний інструмент для випадіння блоку",
         effectiveMaterial: "Ефективний матеріал інструменту",
         effectiveMaterialText: "Мінімальний матеріал інструменту, потрібний для випадіння блоку",
+        exFlower: "Квітка",
+        exFlowerFree: "Квітка (Вільне розміщення)",
+        exTripleChair: "Потрійний стілець",
+        exTripleChairPart: "triple_chair_part (Потрібно для потрійного стільця)",
+
         emmmm: "",
         cancel: "Скасувати"
     },
@@ -225,6 +240,11 @@ const translations = {
         requireTool: "Si se requiere la herramienta seleccionada previamente para que caiga el bloque",
         effectiveMaterial: "Material efectivo de la herramienta",
         effectiveMaterialText: "El material mínimo de herramienta requerido para que caiga el bloque",
+        exFlower: "Flor",
+        exFlowerFree: "Flor (Colocación libre)",
+        exTripleChair: "Silla triple",
+        exTripleChairPart: "triple_chair_part (Necesario para la silla triple)",
+
         emmmm: "",
         cancel: "Cancelar"
     },
@@ -282,6 +302,11 @@ const translations = {
         requireTool: "Ob das zuvor ausgewählte Werkzeug zum Droppen des Blocks benötigt wird",
         effectiveMaterial: "Effektives Werkzeugmaterial",
         effectiveMaterialText: "Das minimale Werkzeugmaterial, das zum Droppen des Blocks benötigt wird",
+        exFlower: "Blume",
+        exFlowerFree: "Blume (Freie Platzierung)",
+        exTripleChair: "Dreifachstuhl",
+        exTripleChairPart: "triple_chair_part (Erforderlich für den Dreifachstuhl)",
+
         cancel: "Abbrechen"
     },
     be: {
@@ -338,6 +363,11 @@ const translations = {
         requireTool: "Ці патрабуецца раней выбраны інструмент для выпадзення блока",
         effectiveMaterial: "Эфектыўны матэрыял інструмента",
         effectiveMaterialText: "Мінімальны матэрыял інструмента, неабходны для выпадзення блока",
+        exFlower: "Кветка",
+        exFlowerFree: "Кветка (Вольнае размяшчэнне)",
+        exTripleChair: "Патройны крэсла",
+        exTripleChairPart: "triple_chair_part (Неабходна для патройнага крэсла)",
+
         cancel: "Адмена"
     }
 
