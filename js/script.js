@@ -370,13 +370,18 @@ function loadExample(name) {
 
 
 }
+
+function importYaml() {
+    let text = document.getElementById('yamlInput').value
+    applyYaml(text)
+    document.getElementById('yamlImportBox').classList.add('hidden');
+}
 function applyYaml(text) {
     try {
         const data = jsyaml.load(text);
 
-        // Пример: заполняем только поле name
-        if (data.name) document.getElementById('name').value = data.name;
-        if (data.baseType) document.getElementById('baseType').value = data.baseType;
+        document.getElementById('name').value = data.name;
+        document.getElementById('baseType').value = data.baseType;
 
         document.getElementById('isSolid').checked = data.isSolid;
         document.getElementById('isSolid').dispatchEvent(new Event("change"));
@@ -436,13 +441,13 @@ function applyYaml(text) {
         document.getElementById('placeDown').checked = data.canPlace.down ?? false;
 
 
-        document.getElementById('modelId').value = data.model.id;
-        document.getElementById('modelCmd').value = data.model.cmd;
-        document.getElementById('modelColor').value = data.model.color;
+        document.getElementById('modelId').value = data.model?.id;
+        document.getElementById('modelCmd').value = data.model?.cmd;
+        document.getElementById('modelColor').value = data.model?.color;
 
-        document.getElementById('itemId').value = data.model.itemId;
-        document.getElementById('itemCmd').value = data.model.itemCmd;
-        document.getElementById('itemColor').value = data.model.itemColor;
+        document.getElementById('itemId').value = data.model?.itemId;
+        document.getElementById('itemCmd').value = data.model?.itemCmd;
+        document.getElementById('itemColor').value = data.model?.itemColor;
 
 
         document.getElementById('scaleX').value = data.model.scale.x ?? 1;
@@ -554,12 +559,10 @@ function applyYaml(text) {
 
 
 
-        document.getElementById('yamlImportBox').classList.add('hidden');
+
         generateCode();
 
-    } catch (err) {
-        document.getElementById('yamlImportBox').classList.add('hidden');
-    }
+    } catch (err) {}
 }
 window.onload = () => {
     addClickCommand('say %player_name% clicked on the block'); // Значение по умолчанию
