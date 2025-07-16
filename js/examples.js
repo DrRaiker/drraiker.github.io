@@ -450,5 +450,38 @@ const examples = {
         '  place: minecraft:block.wood.place\n' +
         '  break: minecraft:block.wood.break\n' +
         '  interact: minecraft:ui.button.click',
+    "hat": 'name: \'Hat\'\n' +
+        'baseType: barrier\n' +
+        'isSolid: true\n' +
+        'canDestroy: false\n' +
+        'hasDrop: true\n' +
+        'model:\n' +
+        '  id: melon\n' +
+        '  cmd: 0\n' +
+        '  color: \'#ffffff\'\n' +
+        '  itemId: melon\n' +
+        '  itemCmd: 0\n' +
+        '  itemColor: \'#ffffff\'\n' +
+        '  isRotates: false\n' +
+        '  scale:\n' +
+        '    x: 1\n' +
+        '    y: 1\n' +
+        '    z: 1\n' +
+        '  rotation:\n' +
+        '    yaw: 0\n' +
+        '    pitch: 0\n' +
+        '  offset:\n' +
+        '    x: 0\n' +
+        '    y: 0\n' +
+        '    z: 0\n' +
+        '  itemLore:\n' +
+        '  - \'\'\n' +
+        '  isHat: true\n' +
+        'components:\n' +
+        '  max_stack_size: 1\n' +
+        'sounds:\n' +
+        '  place: minecraft:block.stone.place\n' +
+        '  break: minecraft:block.stone.break\n' +
+        '  interact: minecraft:ui.button.click',
     "close": ''
 }

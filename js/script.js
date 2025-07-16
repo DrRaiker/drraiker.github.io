@@ -100,12 +100,11 @@ inventory:
   name: '${val('invName')}'` : ''}
 components:
   max_stack_size: ${num('maxStack')}
-${bool('hasClickCommands') ? `hasClickCommands: true` : ''}
 ${bool('hasRecipe') ? `hasRecipe: true` : ''}
 sounds:
   place: ${val('soundPlace') || 'minecraft:block.stone.place'}
   break: ${val('soundBreak') || 'minecraft:block.stone.break'}
-  interact: ${val('soundInteract') || 'minecraft:block.stone.ui.button.click'}`;
+  interact: ${val('soundInteract') || 'minecraft:ui.button.click'}`;
 
     const additionalBlocks = [...document.querySelectorAll('#additionalBlocks > div')].map((div, i) => {
         const id = div.querySelector('.id').value || 'none';
@@ -120,12 +119,33 @@ sounds:
         yaml += `\nadditional-blocks:\n${additionalBlocks || "  '1':\n    id: none\n    position: 0 1 0"}`;
     }
     if (bool('hasClickCommands')) {
+        yaml += '\nhasClickCommands: true'
         const commandInputs = [...document.querySelectorAll('.commandInput')]
             .map(input => input.value.trim())
             .filter(cmd => cmd !== '');
 
         if (commandInputs.length > 0) {
             yaml += `\nclickCommands:\n${commandInputs.map(cmd => `- ${cmd}`).join('\n')}`;
+        }
+    }
+    if (bool('hasPlaceCommands')) {
+        yaml += '\nhasPlaceCommands: true'
+        const commandInputs = [...document.querySelectorAll('.commandPlaceInput')]
+            .map(input => input.value.trim())
+            .filter(cmd => cmd !== '');
+
+        if (commandInputs.length > 0) {
+            yaml += `\nplaceCommands:\n${commandInputs.map(cmd => `- ${cmd}`).join('\n')}`;
+        }
+    }
+    if (bool('hasBreakCommands')) {
+        yaml += '\nhasBreakCommands: true'
+        const commandInputs = [...document.querySelectorAll('.commandBreakInput')]
+            .map(input => input.value.trim())
+            .filter(cmd => cmd !== '');
+
+        if (commandInputs.length > 0) {
+            yaml += `\nbreakCommands:\n${commandInputs.map(cmd => `- ${cmd}`).join('\n')}`;
         }
     }
 
@@ -302,14 +322,22 @@ function toggleOptions(elstr, arr, negative = false) {
 }
 
 
-function addClickCommand(value = '') {
-    const container = document.getElementById("clickCommandsContainer");
+function addClickCommand(id, value = '') {
+    const container = document.getElementById(id);
 
     const div = document.createElement("div");
     div.className = "flex gap-2 items-center";
 
+    inp = "commandInput"
+
+    if (id === "breakCommandsContainer") {
+        inp = "commandBreakInput"
+    } else if (id === "placeCommandsContainer") {
+        inp = "commandPlaceInput"
+    }
+
     div.innerHTML = `
-    <input type="text" class="commandInput bg-gray-700 text-white p-1 m-1 rounded w-full" value="${value}" />
+    <input type="text" class="${inp} bg-gray-700 text-white p-1 m-1 rounded w-full" value="${value}" />
     <button type="button" class="text-red-400 hover:text-red-600" onclick="this.parentElement.remove(); generateCode()">✖</button>
   `;
 
@@ -535,7 +563,33 @@ function applyYaml(text) {
         if (data['clickCommands']) {
             for (const key in data['clickCommands']) {
                 const block = data['clickCommands'][key];
-                addClickCommand(block);
+                addClickCommand("clickCommandsContainer",block);
+            }
+        }
+
+        document.getElementById('hasPlaceCommands').checked = data.hasPlaceCommands ?? false;
+        document.getElementById('hasPlaceCommands').dispatchEvent(new Event("change"));
+
+
+        document.getElementById('placeCommandsContainer').innerHTML = '';
+
+        if (data['placeCommands']) {
+            for (const key in data['placeCommands']) {
+                const block = data['placeCommands'][key];
+                addClickCommand("placeCommandsContainer",block);
+            }
+        }
+
+        document.getElementById('hasBreakCommands').checked = data.hasBreakCommands ?? false;
+        document.getElementById('hasBreakCommands').dispatchEvent(new Event("change"));
+
+
+        document.getElementById('breakCommandsContainer').innerHTML = '';
+
+        if (data['breakCommands']) {
+            for (const key in data['breakCommands']) {
+                const block = data['breakCommands'][key];
+                addClickCommand("breakCommandsContainer",block);
             }
         }
 
@@ -571,10 +625,7 @@ function applyYaml(text) {
 
         document.getElementById('soundPlace').value = data.sounds?.place ?? "minecraft:block.stone.place";
         document.getElementById('soundBreak').value = data.sounds?.break ?? "minecraft:block.stone.break";
-        document.getElementById('soundInteract').value = data.sounds?.interact ?? "minecraft:block.stone.ui.button.click";
-
-
-
+        document.getElementById('soundInteract').value = data.sounds?.interact ?? "minecraft:ui.button.click";
 
 
         generateCode();
@@ -583,7 +634,9 @@ function applyYaml(text) {
 }
 window.onload = () => {
 
-    addClickCommand('say %player_name% clicked on the block'); // Значение по умолчанию
+    addClickCommand("clickCommandsContainer", 'say %player_name% clicked on the block %block_x% %block_y% %block_z%');
+    addClickCommand("placeCommandsContainer", 'say %player_name% place the block %block_x% %block_y% %block_z%');
+    addClickCommand("breakCommandsContainer", 'say %player_name% break the block %block_x% %block_y% %block_z%');
     generateCode();
 
     toggleOptions('isRotates', ['rotate-options']);
@@ -593,6 +646,8 @@ window.onload = () => {
     toggleOptions('rotateByBlockface', ["binding"]);
     toggleOptions('hasInventory', ["inv-options"]);
     toggleOptions('hasClickCommands', ["clickCommands"]);
+    toggleOptions('hasPlaceCommands', ["placeCommands"]);
+    toggleOptions('hasBreakCommands', ["breakCommands"]);
     toggleOptions('hasRecipe', ["recipe-options"]);
     toggleOptions('isOre', ["ore-options"]);
     toggleOptions('requireTool', ["tool-options"]);
@@ -631,6 +686,14 @@ window.onload = () => {
     });
     document.getElementById('hasClickCommands').addEventListener('change', () => {
         toggleOptions('hasClickCommands', ["clickCommands"]);
+        generateCode();
+    });
+    document.getElementById('hasPlaceCommands').addEventListener('change', () => {
+        toggleOptions('hasPlaceCommands', ["placeCommands"]);
+        generateCode();
+    });
+    document.getElementById('hasBreakCommands').addEventListener('change', () => {
+        toggleOptions('hasBreakCommands', ["breakCommands"]);
         generateCode();
     });
     document.getElementById('hasRecipe').addEventListener('change', () => {

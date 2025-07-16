@@ -34,7 +34,6 @@ const translations = {
             "id - Имя файла кастомного блока<br>\n" +
             "если блок по id не найден, он пропускается<br>\n" +
             "x y z - смещение в блоках относительно основного блока. 0 0 0 - ничего не сделает",
-        hasCommands: "Команды, которые консоль выполнит, когда игрок нажмет на блок. Плейсхолдеры будут выполнены от имени игрока, который нажал на блок.",
         recipe: "Разместите символы в ячейках так, как предметы должны быть размещены в верстаке. Не заполняйте пустые слоты.",
         ingredients: "Назначьте каждому символу spigot материал, например, stone, diamond, stick.\n" +
             "Или вы можете использовать теги minecraft, например, #minecraft:planks, #minecraft:logs, #minecraft:wooden_slabs",
@@ -50,6 +49,9 @@ const translations = {
         exSeat: "Стул ступеньки",
         exOre: "Руда",
         exPainting: "Картина",
+        exDrawer: "Ящик",
+        exHangingDrawer: "Навесной ящик",
+        exHat: "Шляпа",
         requireTool: "Нужен ли выбранный ранее инструмент для выпадения блока",
         effectiveMaterial: "Эффективный материал инструмента",
         effectiveMaterialText: "Минимальный материал инструмента нужный для выпадения блока",
@@ -57,6 +59,9 @@ const translations = {
         exFlowerFree: "Цветок (Free place)",
         exTripleChair: "Тройной стул",
         exTripleChairPart: "triple_chair_part (Нужен для тройного стула)",
+        hasCommands: "Команды, которые консоль выполнит, когда игрок нажмет на блок. Плейсхолдеры будут выполнены от имени игрока, который нажал на блок.<br> Используй %block_x%, %block_y%, %block_z% для получения координат блока",
+        hasPlaceCommands: "Команды, которые консоль выполнит, когда игрок поставил блок. Плейсхолдеры будут выполнены от имени игрока, который поставил блок.<br> Используй %block_x%, %block_y%, %block_z% для получения координат блока",
+        hasBreakCommands: "Команды, которые консоль выполнит, когда игрок сломал блок. Плейсхолдеры будут выполнены от имени игрока, который сломал блок.<br> Используй %block_x%, %block_y%, %block_z% для получения координат блока",
         emmmm: "",
 
         cancel: "Отмена"
@@ -96,7 +101,6 @@ const translations = {
             "                  id - Custom block file name<br>\n" +
             "                  if a block by id is not found, it is skipped<br>\n" +
             "                  x y z - offset in blocks, relative to the main block. 0 0 0 - will do nothing",
-        hasCommands: "Commands that the console will execute when the player clicks on the block. Placeholders will be executed on behalf of the player who clicked.",
         recipe: "Place the symbols in the cells as the items should be placed in the crafting table. Do not fill empty slots.",
         ingredients: "Assign each symbol a spigot material, such as stone, diamond, stick.\n" +
             "Or you can use minecraft tags, such as #minecraft:planks, #minecraft:logs, #minecraft:wooden_slabs",
@@ -114,6 +118,7 @@ const translations = {
         exPainting: "Painting",
         exDrawer: "Drawer",
         exHangingDrawer: "Hanging Drawer",
+        exHat: "Hat",
         requireTool: "Whether the previously selected tool is required for the block to drop",
         effectiveMaterial: "Effective tool material",
         effectiveMaterialText: "The minimum tool material required for the block to drop",
@@ -121,7 +126,9 @@ const translations = {
         exFlowerFree: "Flower (Free place)",
         exTripleChair: "Triple Chair",
         exTripleChairPart: "triple_chair_part (Need for Triple Chair)",
-
+        hasCommands: "Commands that the console will execute when the player clicks on the block. Placeholders will be executed as the player who clicked the block.<br> Use %block_x%, %block_y%, %block_z% to get the block's coordinates.",
+        hasPlaceCommands: "Commands that the console will execute when the player places the block. Placeholders will be executed as the player who placed the block.<br> Use %block_x%, %block_y%, %block_z% to get the block's coordinates.",
+        hasBreakCommands: "Commands that the console will execute when the player breaks the block. Placeholders will be executed as the player who broke the block.<br> Use %block_x%, %block_y%, %block_z% to get the block's coordinates.",
         cancel: "cancel"
     },
     uk: {
@@ -159,7 +166,6 @@ const translations = {
             "id - Назва файлу користувацького блоку<br>\n" +
             "якщо блок із вказаним id не знайдено, він пропускається<br>\n" +
             "x y z - зсув у блоках відносно основного блоку. 0 0 0 - нічого не зробить",
-        hasCommands: "Команди, які консоль виконає, коли гравець натисне на блок. Плейсхолдери виконуються від імені гравця.",
         recipe: "Розмістіть символи в комірках так, як предмети мають бути у верстаку. Не заповнюйте порожні комірки.",
         ingredients: "Призначте кожному символу матеріал Spigot, наприклад stone, diamond, stick.\n" +
             "Або можна використовувати теги Minecraft, наприклад, #minecraft:planks, #minecraft:logs, #minecraft:wooden_slabs",
@@ -181,8 +187,13 @@ const translations = {
         exFlower: "Квітка",
         exFlowerFree: "Квітка (Вільне розміщення)",
         exTripleChair: "Потрійний стілець",
+        "exDrawer": "Шухляда",
+        "exHangingDrawer": "Підвісна шухляда",
+        "exHat": "Капелюх",
         exTripleChairPart: "triple_chair_part (Потрібно для потрійного стільця)",
-
+        hasCommands: "Команди, які консоль виконає, коли гравець натисне на блок. Плейсхолдери будуть виконані від імені гравця, який натиснув на блок.<br> Використовуйте %block_x%, %block_y%, %block_z% для отримання координат блока.",
+        hasPlaceCommands: "Команди, які консоль виконає, коли гравець поставить блок. Плейсхолдери будуть виконані від імені гравця, який поставив блок.<br> Використовуйте %block_x%, %block_y%, %block_z% для отримання координат блока.",
+        hasBreakCommands: "Команди, які консоль виконає, коли гравець зламає блок. Плейсхолдери будуть виконані від імені гравця, який зламав блок.<br> Використовуйте %block_x%, %block_y%, %block_z% для отримання координат блока.",
         emmmm: "",
         cancel: "Скасувати"
     },
@@ -221,7 +232,6 @@ const translations = {
             "id - Nombre del archivo del bloque personalizado<br>\n" +
             "si no se encuentra un bloque con ese id, se omite<br>\n" +
             "x y z - desplazamiento en bloques respecto al bloque principal. 0 0 0 - no hace nada",
-        hasCommands: "Comandos que la consola ejecutará cuando el jugador haga clic en el bloque. Los marcadores de posición se ejecutan como el jugador.",
         recipe: "Coloca los símbolos en las celdas como deben ir en la mesa de trabajo. No rellenes los huecos vacíos.",
         ingredients: "Asigna a cada símbolo un material Spigot, como stone, diamond, stick.\n" +
             "O puedes usar etiquetas de Minecraft, como #minecraft:planks, #minecraft:logs, #minecraft:wooden_slabs",
@@ -237,6 +247,9 @@ const translations = {
         exSeat: "Asiento de escaleras",
         exOre: "Mena",
         exPainting: "Cuadro",
+        "exDrawer": "Cajón",
+        "exHangingDrawer": "Cajón colgante",
+        "exHat": "Sombrero",
         requireTool: "Si se requiere la herramienta seleccionada previamente para que caiga el bloque",
         effectiveMaterial: "Material efectivo de la herramienta",
         effectiveMaterialText: "El material mínimo de herramienta requerido para que caiga el bloque",
@@ -244,7 +257,9 @@ const translations = {
         exFlowerFree: "Flor (Colocación libre)",
         exTripleChair: "Silla triple",
         exTripleChairPart: "triple_chair_part (Necesario para la silla triple)",
-
+        hasCommands: "Comandos que la consola ejecutará cuando el jugador haga clic en el bloque. Los marcadores de posición se ejecutarán como el jugador que hizo clic en el bloque.<br> Usa %block_x%, %block_y%, %block_z% para obtener las coordenadas del bloque.",
+        hasPlaceCommands: "Comandos que la consola ejecutará cuando el jugador coloque el bloque. Los marcadores de posición se ejecutarán como el jugador que colocó el bloque.<br> Usa %block_x%, %block_y%, %block_z% para obtener las coordenadas del bloque.",
+        hasBreakCommands: "Comandos que la consola ejecutará cuando el jugador rompa el bloque. Los marcadores de posición se ejecutarán como el jugador que rompió el bloque.<br> Usa %block_x%, %block_y%, %block_z% para obtener las coordenadas del bloque.",
         emmmm: "",
         cancel: "Cancelar"
     },
@@ -283,7 +298,6 @@ const translations = {
             "id - Name der benutzerdefinierten Blockdatei<br>\n" +
             "wenn der Block mit der ID nicht gefunden wird, wird er übersprungen<br>\n" +
             "x y z - Versatz in Blöcken relativ zum Hauptblock. 0 0 0 - bewirkt nichts",
-        hasCommands: "Befehle, die die Konsole ausführt, wenn der Spieler auf den Block klickt. Platzhalter werden im Namen des klickenden Spielers ausgeführt.",
         recipe: "Platziere die Symbole in den Feldern so, wie die Gegenstände im Crafting-Tisch angeordnet sein sollen. Leere Felder nicht ausfüllen.",
         ingredients: "Weise jedem Symbol ein Spigot-Material zu, z.B. stone, diamond, stick.\n" +
             "Oder verwende Minecraft-Tags wie #minecraft:planks, #minecraft:logs, #minecraft:wooden_slabs",
@@ -299,6 +313,9 @@ const translations = {
         exSeat: "Treppensitz",
         exOre: "Erz",
         exPainting: "Gemälde",
+        "exDrawer": "Schublade",
+        "exHangingDrawer": "Hängende Schublade",
+        "exHat": "Hut",
         requireTool: "Ob das zuvor ausgewählte Werkzeug zum Droppen des Blocks benötigt wird",
         effectiveMaterial: "Effektives Werkzeugmaterial",
         effectiveMaterialText: "Das minimale Werkzeugmaterial, das zum Droppen des Blocks benötigt wird",
@@ -306,6 +323,9 @@ const translations = {
         exFlowerFree: "Blume (Freie Platzierung)",
         exTripleChair: "Dreifachstuhl",
         exTripleChairPart: "triple_chair_part (Erforderlich für den Dreifachstuhl)",
+        hasCommands: "Befehle, die die Konsole ausführt, wenn der Spieler auf den Block klickt. Platzhalter werden im Namen des Spielers ausgeführt, der auf den Block geklickt hat.<br> Verwende %block_x%, %block_y%, %block_z%, um die Koordinaten des Blocks zu erhalten.",
+        hasPlaceCommands: "Befehle, die die Konsole ausführt, wenn der Spieler den Block platziert. Platzhalter werden im Namen des Spielers ausgeführt, der den Block platziert hat.<br> Verwende %block_x%, %block_y%, %block_z%, um die Koordinaten des Blocks zu erhalten.",
+        hasBreakCommands: "Befehle, die die Konsole ausführt, wenn der Spieler den Block zerstört. Platzhalter werden im Namen des Spielers ausgeführt, der den Block zerstört hat.<br> Verwende %block_x%, %block_y%, %block_z%, um die Koordinaten des Blocks zu erhalten.",
 
         cancel: "Abbrechen"
     },
@@ -344,7 +364,6 @@ const translations = {
             "id — імя файла карыстацкага блока<br>\n" +
             "калі блок не знойдзены — прапускаецца<br>\n" +
             "x y z — змяшчэнне адносна асноўнага блока. 0 0 0 — нічога не робіць",
-        hasCommands: "Каманды, якія выканае кансоль, калі гулец націсне на блок. Плэйсхолдары выконваюцца ад імя гульца.",
         recipe: "Размясціце сімвалы так, як прадметы павінны размяшчацца ў варштаку. Не запаўняйце пустыя ячэйкі.",
         ingredients: "Прызначце кожнаму сімвалу матэрыял Spigot, напрыклад stone, diamond, stick.\n" +
             "Або выкарыстоўвайце тэгі Minecraft, напрыклад #minecraft:planks, #minecraft:logs, #minecraft:wooden_slabs",
@@ -360,6 +379,9 @@ const translations = {
         exSeat: "Сядзенне на прыступках",
         exOre: "Руда",
         exPainting: "Карціна",
+        "exDrawer": "Шуфлядка",
+        "exHangingDrawer": "Падвесная шуфлядка",
+        "exHat": "Капялюш",
         requireTool: "Ці патрабуецца раней выбраны інструмент для выпадзення блока",
         effectiveMaterial: "Эфектыўны матэрыял інструмента",
         effectiveMaterialText: "Мінімальны матэрыял інструмента, неабходны для выпадзення блока",
@@ -367,7 +389,9 @@ const translations = {
         exFlowerFree: "Кветка (Вольнае размяшчэнне)",
         exTripleChair: "Патройны крэсла",
         exTripleChairPart: "triple_chair_part (Неабходна для патройнага крэсла)",
-
+        hasCommands: "Каманды, якія кансоль выканае, калі гулец націсне на блок. Плэйсхолдары будуць выкананы ад імя гульца, які націснуў на блок.<br> Выкарыстоўвайце %block_x%, %block_y%, %block_z% для атрымання каардынат блока.",
+        hasPlaceCommands: "Каманды, якія кансоль выканае, калі гулец паставіць блок. Плэйсхолдары будуць выкананы ад імя гульца, які паставіў блок.<br> Выкарыстоўвайце %block_x%, %block_y%, %block_z% для атрымання каардынат блока.",
+        hasBreakCommands: "Каманды, якія кансоль выканае, калі гулец зломіць блок. Плэйсхолдары будуць выкананы ад імя гульца, які зламаў блок.<br> Выкарыстоўвайце %block_x%, %block_y%, %block_z% для атрымання каардынат блока.",
         cancel: "Адмена"
     }
 
