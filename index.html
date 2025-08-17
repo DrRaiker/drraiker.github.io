@@ -499,6 +499,21 @@
                     />
                     <span id="max-stack-span" class="ml-2">64</span>
                 </label>
+
+                <div id="blur">
+                <br>
+                <span class="text-sm font-medium">Hat Overlay
+
+                <span class="relative">
+              <button type="button" class="text-xs bg-gray-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center relative z-10" onmouseenter="this.nextElementSibling.classList.remove('hidden')" onmouseleave="this.nextElementSibling.classList.add('hidden')">?</button>
+              <span data-i18n="overlay" class="hidden absolute left-full top-1/2 -translate-y-1/2 ml-2 w-64 text-sm text-white bg-gray-800 border p-2 rounded shadow-lg z-20">
+                  The type of block that will be used as a hitbox, barrier universal
+  </span>
+            </span>
+                </span>
+                <input id="overlay" type="text" placeholder="" class="mt-1 w-full rounded border p-2 bg-gray-700 text-white" />
+                </div>
+
             </div>
         </fieldset>
 

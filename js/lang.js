@@ -62,6 +62,7 @@ const translations = {
         hasCommands: "Команды, которые консоль выполнит, когда игрок нажмет на блок. Плейсхолдеры будут выполнены от имени игрока, который нажал на блок.<br> Используй %block_x%, %block_y%, %block_z% для получения координат блока",
         hasPlaceCommands: "Команды, которые консоль выполнит, когда игрок поставил блок. Плейсхолдеры будут выполнены от имени игрока, который поставил блок.<br> Используй %block_x%, %block_y%, %block_z% для получения координат блока",
         hasBreakCommands: "Команды, которые консоль выполнит, когда игрок сломал блок. Плейсхолдеры будут выполнены от имени игрока, который сломал блок.<br> Используй %block_x%, %block_y%, %block_z% для получения координат блока",
+        overlay: "Прописывается путь до оверлея шляпы, например \"misc/pumpkinblur\" для оверлея тыквы!",
         emmmm: "",
 
         cancel: "Отмена"
@@ -129,6 +130,7 @@ const translations = {
         hasCommands: "Commands that the console will execute when the player clicks on the block. Placeholders will be executed as the player who clicked the block.<br> Use %block_x%, %block_y%, %block_z% to get the block's coordinates.",
         hasPlaceCommands: "Commands that the console will execute when the player places the block. Placeholders will be executed as the player who placed the block.<br> Use %block_x%, %block_y%, %block_z% to get the block's coordinates.",
         hasBreakCommands: "Commands that the console will execute when the player breaks the block. Placeholders will be executed as the player who broke the block.<br> Use %block_x%, %block_y%, %block_z% to get the block's coordinates.",
+        overlay: "The path to the hat overlay is specified, for example \"misc/pumpkinblur\" for the pumpkin overlay!",
         cancel: "cancel"
     },
     uk: {
@@ -194,6 +196,7 @@ const translations = {
         hasCommands: "Команди, які консоль виконає, коли гравець натисне на блок. Плейсхолдери будуть виконані від імені гравця, який натиснув на блок.<br> Використовуйте %block_x%, %block_y%, %block_z% для отримання координат блока.",
         hasPlaceCommands: "Команди, які консоль виконає, коли гравець поставить блок. Плейсхолдери будуть виконані від імені гравця, який поставив блок.<br> Використовуйте %block_x%, %block_y%, %block_z% для отримання координат блока.",
         hasBreakCommands: "Команди, які консоль виконає, коли гравець зламає блок. Плейсхолдери будуть виконані від імені гравця, який зламав блок.<br> Використовуйте %block_x%, %block_y%, %block_z% для отримання координат блока.",
+        overlay: "Прописується шлях до оверлея капелюха, наприклад \"misc/pumpkinblur\" для оверлея гарбуза!",
         emmmm: "",
         cancel: "Скасувати"
     },
@@ -260,6 +263,7 @@ const translations = {
         hasCommands: "Comandos que la consola ejecutará cuando el jugador haga clic en el bloque. Los marcadores de posición se ejecutarán como el jugador que hizo clic en el bloque.<br> Usa %block_x%, %block_y%, %block_z% para obtener las coordenadas del bloque.",
         hasPlaceCommands: "Comandos que la consola ejecutará cuando el jugador coloque el bloque. Los marcadores de posición se ejecutarán como el jugador que colocó el bloque.<br> Usa %block_x%, %block_y%, %block_z% para obtener las coordenadas del bloque.",
         hasBreakCommands: "Comandos que la consola ejecutará cuando el jugador rompa el bloque. Los marcadores de posición se ejecutarán como el jugador que rompió el bloque.<br> Usa %block_x%, %block_y%, %block_z% para obtener las coordenadas del bloque.",
+        overlay: "Se especifica la ruta a la superposición del sombrero, por ejemplo, \"misc/pumpkinblur\" para la superposición de calabaza",
         emmmm: "",
         cancel: "Cancelar"
     },
@@ -326,7 +330,7 @@ const translations = {
         hasCommands: "Befehle, die die Konsole ausführt, wenn der Spieler auf den Block klickt. Platzhalter werden im Namen des Spielers ausgeführt, der auf den Block geklickt hat.<br> Verwende %block_x%, %block_y%, %block_z%, um die Koordinaten des Blocks zu erhalten.",
         hasPlaceCommands: "Befehle, die die Konsole ausführt, wenn der Spieler den Block platziert. Platzhalter werden im Namen des Spielers ausgeführt, der den Block platziert hat.<br> Verwende %block_x%, %block_y%, %block_z%, um die Koordinaten des Blocks zu erhalten.",
         hasBreakCommands: "Befehle, die die Konsole ausführt, wenn der Spieler den Block zerstört. Platzhalter werden im Namen des Spielers ausgeführt, der den Block zerstört hat.<br> Verwende %block_x%, %block_y%, %block_z%, um die Koordinaten des Blocks zu erhalten.",
-
+        overlay: "Der Pfad zum Hut-Overlay ist angegeben, zum Beispiel \"misc/pumpkinblur\" für das Kürbis-Overlay!",
         cancel: "Abbrechen"
     },
     be: {
@@ -392,6 +396,7 @@ const translations = {
         hasCommands: "Каманды, якія кансоль выканае, калі гулец націсне на блок. Плэйсхолдары будуць выкананы ад імя гульца, які націснуў на блок.<br> Выкарыстоўвайце %block_x%, %block_y%, %block_z% для атрымання каардынат блока.",
         hasPlaceCommands: "Каманды, якія кансоль выканае, калі гулец паставіць блок. Плэйсхолдары будуць выкананы ад імя гульца, які паставіў блок.<br> Выкарыстоўвайце %block_x%, %block_y%, %block_z% для атрымання каардынат блока.",
         hasBreakCommands: "Каманды, якія кансоль выканае, калі гулец зломіць блок. Плэйсхолдары будуць выкананы ад імя гульца, які зламаў блок.<br> Выкарыстоўвайце %block_x%, %block_y%, %block_z% для атрымання каардынат блока.",
+        overlay: "Прапісваецца шлях да оверлея капялюшы, напрыклад \"misc/pumpkinblur\" для оверлея гарбуза!",
         cancel: "Адмена"
     }
 

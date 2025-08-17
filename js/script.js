@@ -100,6 +100,11 @@ inventory:
   name: '${val('invName')}'` : ''}
 components:
   max_stack_size: ${num('maxStack')}
+  ${bool('isHat') ? `
+  camera_overlay: '${val('overlay')}'
+` : ''}
+
+  
 ${bool('hasRecipe') ? `hasRecipe: true` : ''}
 sounds:
   place: ${val('soundPlace') || 'minecraft:block.stone.place'}
@@ -539,8 +544,13 @@ function applyYaml(text) {
         document.getElementById('invName').value = data.inventory?.name ?? "Inventory Name";
 
 
-        document.getElementById('maxStack').value = data.components?.['max_stack_size'] ?? 64;
-        document.getElementById('max-stack-span').innerHTML = data.components?.['max_stack_size'] ?? 64;
+        document.getElementById('isHat').checked = data.model?.isHat ?? false;
+        document.getElementById('isHat').dispatchEvent(new Event("change"));
+
+        document.getElementById('overlay').value = data?.components?.['camera_overlay'] ?? "";
+
+        document.getElementById('maxStack').value = data?.components?.['max_stack_size'] ?? 64;
+        document.getElementById('max-stack-span').innerHTML = data?.components?.['max_stack_size'] ?? 64;
 
         document.getElementById('additionalBlocks').innerHTML = '';
 
@@ -652,6 +662,7 @@ window.onload = () => {
     toggleOptions('isOre', ["ore-options"]);
     toggleOptions('requireTool', ["tool-options"]);
     toggleOptions('hasDrop', ["drop-options"]);
+    toggleOptions('isHat', ["blur"]);
     setupAutoUpdate()
 
     document.getElementById('isRotates').addEventListener('change', () => {
@@ -713,6 +724,11 @@ window.onload = () => {
 
     document.getElementById('hasDrop').addEventListener('change', () => {
         toggleOptions('hasDrop', ["drop-options"]);
+        generateCode();
+    });
+
+    document.getElementById('isHat').addEventListener('change', () => {
+        toggleOptions('isHat', ["blur"]);
         generateCode();
     });
 
