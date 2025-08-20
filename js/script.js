@@ -746,3 +746,4 @@ window.onload = () => {
     document.body.classList.add('overflow-hidden'); // заблокировать
 
 };
+

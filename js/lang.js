@@ -410,3 +410,4 @@ function applyTranslations(lang) {
     });
 }
 
+
