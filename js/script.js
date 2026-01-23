@@ -49,10 +49,10 @@ seat:
 ` : ''}
 model:
   id: ${val('modelId') || 'gold_ingot'}
-  cmd: ${num('modelCmd')}
+  cmd: ${val('modelCmd')}
   color: '${val('modelColor') || '#FFFFFF'}'
   itemId: ${val('itemId') || 'stick'}
-  itemCmd: ${num('itemCmd')}
+  itemCmd: ${val('itemCmd')}
   itemColor: '${val('itemColor') || '#FFFFFF'}'
   isRotates: ${bool('isRotates')}
   scale:

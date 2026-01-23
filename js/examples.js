@@ -17,10 +17,10 @@ const examples = {
         '  rotate-by-passenger: false\n' +
         'model:\n' +
         '  id: oak_stairs\n' +
-        '  cmd: 0\n' +
+        '  cmd: \'none\'\n' +
         '  color: \'#ffffff\'\n' +
         '  itemId: oak_stairs\n' +
-        '  itemCmd: 0\n' +
+        '  itemCmd: \'none\'\n' +
         '  itemColor: \'#ffffff\'\n' +
         '  isRotates: true\n' +
         '  scale:\n' +
@@ -70,10 +70,10 @@ const examples = {
         '  down: true\n' +
         'model:\n' +
         '  id: emerald_block\n' +
-        '  cmd: 0\n' +
+        '  cmd: \'none\'\n' +
         '  color: \'#ffffff\'\n' +
         '  itemId: emerald_block\n' +
-        '  itemCmd: 0\n' +
+        '  itemCmd: \'none\'\n' +
         '  itemColor: \'#ffffff\'\n' +
         '  isRotates: false\n' +
         '  scale:\n' +
@@ -127,10 +127,10 @@ const examples = {
         '  down: true\n' +
         'model:\n' +
         '  id: painting\n' +
-        '  cmd: 0\n' +
+        '  cmd: \'none\'\n' +
         '  color: \'#ffffff\'\n' +
         '  itemId: painting\n' +
-        '  itemCmd: 0\n' +
+        '  itemCmd: \'none\'\n' +
         '  itemColor: \'#ffffff\'\n' +
         '  isRotates: true\n' +
         '  scale:\n' +
@@ -170,10 +170,10 @@ const examples = {
         '  down: true\n' +
         'model:\n' +
         '  id: barrel\n' +
-        '  cmd: 0\n' +
+        '  cmd: \'none\'\n' +
         '  color: \'#000000\'\n' +
         '  itemId: barrel\n' +
-        '  itemCmd: 0\n' +
+        '  itemCmd: \'none\'\n' +
         '  itemColor: \'#000000\'\n' +
         '  isRotates: true\n' +
         '  scale:\n' +
@@ -228,10 +228,10 @@ const examples = {
         '  down: true\n' +
         'model:\n' +
         '  id: barrel\n' +
-        '  cmd: 0\n' +
+        '  cmd: \'none\'\n' +
         '  color: \'#000000\'\n' +
         '  itemId: barrel\n' +
-        '  itemCmd: 0\n' +
+        '  itemCmd: \'none\'\n' +
         '  itemColor: \'#000000\'\n' +
         '  isRotates: true\n' +
         '  scale:\n' +
@@ -286,10 +286,10 @@ const examples = {
         '  up: true\n' +
         'model:\n' +
         '  id: poppy\n' +
-        '  cmd: 0\n' +
+        '  cmd: \'none\'\n' +
         '  color: \'#ffffff\'\n' +
         '  itemId: poppy\n' +
-        '  itemCmd: 0\n' +
+        '  itemCmd: \'none\'\n' +
         '  itemColor: \'#ffffff\'\n' +
         '  isRotates: true\n' +
         '  scale:\n' +
@@ -331,10 +331,10 @@ const examples = {
         '  up: true\n' +
         'model:\n' +
         '  id: poppy\n' +
-        '  cmd: 0\n' +
+        '  cmd: \'none\'\n' +
         '  color: \'#ffffff\'\n' +
         '  itemId: poppy\n' +
-        '  itemCmd: 0\n' +
+        '  itemCmd: \'none\'\n' +
         '  itemColor: \'#ffffff\'\n' +
         '  isRotates: true\n' +
         '  scale:\n' +
@@ -375,10 +375,10 @@ const examples = {
         '  rotate-by-passenger: false\n' +
         'model:\n' +
         '  id: acacia_stairs\n' +
-        '  cmd: 0\n' +
+        '  cmd: \'none\'\n' +
         '  color: \'#ffffff\'\n' +
         '  itemId: acacia_stairs\n' +
-        '  itemCmd: 0\n' +
+        '  itemCmd: \'none\'\n' +
         '  itemColor: \'#ffffff\'\n' +
         '  isRotates: true\n' +
         '  scale:\n' +
@@ -425,10 +425,10 @@ const examples = {
         '  rotate-by-passenger: false\n' +
         'model:\n' +
         '  id: acacia_stairs\n' +
-        '  cmd: 0\n' +
+        '  cmd: \'none\'\n' +
         '  color: \'#ffffff\'\n' +
         '  itemId: acacia_stairs\n' +
-        '  itemCmd: 0\n' +
+        '  itemCmd: \'none\'\n' +
         '  itemColor: \'#ffffff\'\n' +
         '  isRotates: true\n' +
         '  scale:\n' +
@@ -457,10 +457,10 @@ const examples = {
         'hasDrop: true\n' +
         'model:\n' +
         '  id: melon\n' +
-        '  cmd: 0\n' +
+        '  cmd: \'none\'\n' +
         '  color: \'#ffffff\'\n' +
         '  itemId: melon\n' +
-        '  itemCmd: 0\n' +
+        '  itemCmd: \'none\'\n' +
         '  itemColor: \'#ffffff\'\n' +
         '  isRotates: false\n' +
         '  scale:\n' +
