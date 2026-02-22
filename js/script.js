@@ -111,13 +111,29 @@ sounds:
   break: ${val('soundBreak') || 'minecraft:block.stone.break'}
   interact: ${val('soundInteract') || 'minecraft:ui.button.click'}`;
 
-    const additionalBlocks = [...document.querySelectorAll('#additionalBlocks > div')].map((div, i) => {
-        const id = div.querySelector('.id').value || 'none';
-        const x = div.querySelector('.x').value || 0;
-        const y = div.querySelector('.y').value || 0;
-        const z = div.querySelector('.z').value || 0;
-        return `  '${i + 1}':\n    id: ${id}\n    position: ${x} ${y} ${z}`;
-    }).join('\n');
+    const additionalBlocks = [...document.querySelectorAll('#additionalBlocks > div')]
+        .map(div => {
+            const id = div.querySelector('.id')?.value;
+            const x = div.querySelector('.x')?.value;
+            const y = div.querySelector('.y')?.value;
+            const z = div.querySelector('.z')?.value;
+
+            if (!id && !x && !y && !z) return null;
+
+            return {
+                id: id || 'none',
+                x: x || 0,
+                y: y || 0,
+                z: z || 0
+            };
+        })
+        .filter(Boolean)
+        .map((b, i) =>
+            `  '${i + 1}':
+    id: ${b.id}
+    position: ${b.x} ${b.y} ${b.z}`
+        )
+        .join('\n');
 
     if (additionalBlocks.length !== 0 && additionalBlocks !== "  '1':\n    id: none\n    position: 0 1 0") {
 
